@@ -1,9 +1,12 @@
-import { Handler } from 'flexiblepersistence';
-import { Pool } from 'pg';
-
 import database from './database';
 import eventDatabase from './eventDatabase';
-import { DatabaseHandler, ServiceAdapter, Utils } from '../../source/index';
+import {
+  DatabaseHandler,
+  ServiceAdapter,
+  Utils,
+  Pool,
+  Handler,
+} from '../../source/index';
 
 // TODO: ADD: Services
 const postgres = new Pool(database);
