@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import RouterSingleton from './routes';
+import RouterSingleton from './routes/routerSingleton';
 
 export default class App {
   public express: express.Application;
