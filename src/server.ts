@@ -1,6 +1,9 @@
-import app from './app';
-import databasesHandler from './databasesHandler';
+import App from './app';
+import databasesHandler from './database/databasesHandler';
+import RouterSingleton from './routes';
+// Sample
+const app = new App(RouterSingleton.getInstance()).express;
 
-databasesHandler.migrate();
+databasesHandler.getInstance().migrate();
 
 app.listen(process.env.PORT || 3333);

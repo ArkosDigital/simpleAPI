@@ -1,4 +1,3 @@
-import pool from '../database/postgresDatabase';
 import DAOModel from '../models/dAOModel';
 import DAOSimpleModel from '../models/dAOSimpleModel';
 import DAOUpdateAdapter from '../interfaces/dAO/dAOUpdateAdapter';
@@ -27,7 +26,7 @@ export default class BaseDAOUpdate extends BaseDAORestrictedDefault
       `RETURNING *` +
       `) ${select} ${this.groupBy}`;
     return new Promise((resolve, reject) => {
-      pool.query(query, [id, ...values], (error, result) => {
+      this.pool.query(query, [id, ...values], (error, result) => {
         if (error) {
           return reject(error);
         }

@@ -1,5 +1,10 @@
 import { Router } from 'express';
-class RouterSingleton {
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+export default class RouterSingleton {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  public abstract createRoutes(): void;
   private static _instance: RouterSingleton;
 
   private routes: Router;
@@ -10,7 +15,7 @@ class RouterSingleton {
 
   public static getInstance(): RouterSingleton {
     if (!this._instance) {
-      this._instance = new RouterSingleton();
+      this._instance = new this();
     }
     return this._instance;
   }
@@ -18,17 +23,4 @@ class RouterSingleton {
   public getRoutes(): Router {
     return this.routes;
   }
-
-  public createRoutes(): void {
-    // const routes = RouterSingleton.getInstance().getRoutes();
-    // SessionRouter(routes); // Always first
-    // RegisterDependantRouter(routes);
-    // RegisterUserRouter(routes);
-    // routes.use(SessionController.auth.bind(SessionController));
-    // SystemRouter(routes);
-    // PersonUserRouter(routes);
-    // PersonDependantRouter(routes);
-  }
 }
-
-export default RouterSingleton;

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-import pool from '../database/postgresDatabase';
 import DAOModel from '../models/dAOModel';
 import DAOSimpleModel from '../models/dAOSimpleModel';
 import DAOStoreAdapter from '../interfaces/dAO/dAOStoreAdapter';
@@ -33,7 +32,7 @@ export default class BaseDAOStore extends BaseDAORestrictedDefault
       `RETURNING *` +
       `) ${select} ${this.groupBy}`;
     return new Promise((resolve, reject) => {
-      pool.query(query, values, (error, result) => {
+      this.pool.query(query, values, (error, result) => {
         if (error) {
           return reject(error);
         }

@@ -3,12 +3,14 @@ import cors from 'cors';
 
 import RouterSingleton from './routes';
 
-class App {
+export default class App {
   public express: express.Application;
+  public router;
 
-  public constructor() {
+  public constructor(router: RouterSingleton) {
     this.express = express();
     this.middlewares();
+    this.router = router;
     this.routes();
   }
 
@@ -18,10 +20,7 @@ class App {
   }
 
   private routes(): void {
-    const router = RouterSingleton.getInstance();
-    router.createRoutes();
-    this.express.use(router.getRoutes());
+    this.router.createRoutes();
+    this.express.use(this.router.getRoutes());
   }
 }
-
-export default new App().express;

@@ -1,4 +1,3 @@
-import pool from '../database/postgresDatabase';
 import DAODeleteAdapter from '../interfaces/dAO/dAODeleteAdapter';
 import BaseDAODefault from './baseDAODefault';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -9,7 +8,7 @@ export default class BaseDAODelete extends BaseDAODefault
     console.log(this.table);
 
     return new Promise((resolve, reject) => {
-      pool.query(
+      this.pool.query(
         `DELETE FROM ${this.table} WHERE id = $1`,
         [id],
         (error, result) => {

@@ -1,4 +1,3 @@
-import pool from '../database/postgresDatabase';
 import DAOModel from '../models/dAOModel';
 import DAOSelectByIdAdapter from '../interfaces/dAO/dAOSelectByIdAdapter';
 import BaseDAODefault from './baseDAODefault';
@@ -10,7 +9,7 @@ export default class BaseDAOSelectById extends BaseDAODefault
   public async selectById(id: string): Promise<DAOModel> {
     const select = await this.generateSelect(this.table);
     return new Promise((resolve, reject) => {
-      pool.query(
+      this.pool.query(
         `${select} WHERE element.id = $1 ${this.groupBy}`,
         [id],
         (error, result) => {

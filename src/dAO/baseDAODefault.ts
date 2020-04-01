@@ -5,6 +5,12 @@ export default class BaseDAODefault {
   // @ts-ignore
   protected abstract table: string;
 
+  constructor(pool) {
+    this.pool = pool;
+  }
+
+  protected pool;
+
   protected groupBy = '';
   protected values = '*';
 

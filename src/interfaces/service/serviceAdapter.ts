@@ -1,13 +1,12 @@
-import ServiceSimpleAdapter from './serviceSimpleAdapter';
-import ServiceModel from '../../models/serviceModel';
-import ServiceSimpleModel from '../../models/serviceSimpleModel';
+import ServiceSelectAllAdapter from './serviceSelectAllAdapter';
+import ServiceSelectByIdAdapter from './serviceSelectByIdAdapter';
+import ServiceStoreAdapter from './serviceStoreAdapter';
+import ServiceUpdateAdapter from './serviceUpdateAdapter';
+import ServiceDeleteAdapter from './serviceDeleteAdapter';
 
-export default interface ServiceAdapter extends ServiceSimpleAdapter {
-  selectById(id: string): Promise<ServiceModel>;
-
-  store(content: ServiceSimpleModel): Promise<ServiceModel>;
-
-  update(id: string, content: ServiceSimpleModel): Promise<ServiceModel>;
-
-  delete(id: string): Promise<boolean>;
-}
+export default interface ServiceAdapter
+  extends ServiceSelectAllAdapter,
+    ServiceSelectByIdAdapter,
+    ServiceStoreAdapter,
+    ServiceUpdateAdapter,
+    ServiceDeleteAdapter {}
