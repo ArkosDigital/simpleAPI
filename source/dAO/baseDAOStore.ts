@@ -7,11 +7,10 @@ import BaseDAORestrictedDefault from './baseDAORestrictedDefault';
 export default class BaseDAOStore extends BaseDAORestrictedDefault
   implements DAOStoreAdapter {
   // @ts-ignore
-  protected abstract beforeInsert: string;
-  // @ts-ignore
   protected abstract insert: string;
   // @ts-ignore
   protected abstract insertValues: string;
+  protected beforeInsert = '';
 
   protected async generateInsert(): Promise<string> {
     const insert = `INSERT INTO ${this.table} (${this.insert}) VALUES (${this.insertValues})`;
