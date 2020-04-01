@@ -54,6 +54,8 @@ import ServiceSimpleModel from './models/serviceSimpleModel';
 
 import RouterSingleton from './routes/routerSingleton';
 
+import { Pool } from 'pg';
+
 export {
   SimpleApp,
   DatabaseHandler,
@@ -102,4 +104,5 @@ export {
   MongoDB,
   PostgresDB,
   Mixin,
+  Pool,
 };
