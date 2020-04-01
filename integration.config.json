@@ -1,0 +1,16 @@
+{
+  "preset": "ts-jest",
+  "roots": [
+    "<rootDir>/tests/integration"
+  ],
+  "clearMocks": true,
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/**"
+  ],
+  "coverageDirectory": "tests/integration/coverage",
+  "testEnvironment": "node",
+  "setupFilesAfterEnv": [
+    "./tests/integration/setup.ts"
+  ]
+}
