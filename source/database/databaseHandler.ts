@@ -1,19 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Handler } from 'flexiblepersistence';
 import ServiceAdapter from '../interfaces/service/serviceAdapter';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-export default class DatabasesHandler {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+export default class DatabaseHandler {
   // @ts-ignore
   public abstract async migrate(): Promise<boolean>;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   protected abstract service: {
     [operation: string]: ServiceAdapter;
   };
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
-  private abstract eventHandler: Handler;
+  protected abstract eventHandler: Handler;
+  // @ts-ignore
+  protected abstract readPool: any;
 
   protected operation: {
     [operation: number]: string;
@@ -25,9 +25,17 @@ export default class DatabasesHandler {
     5: 'deleteElement',
   };
 
-  private static _instance: DatabasesHandler;
+  protected static _instance: DatabaseHandler;
 
-  public static getInstance(): DatabasesHandler {
+  public getEventHandler(): Handler {
+    return this.eventHandler;
+  }
+
+  public getReadPool(): any {
+    return this.readPool;
+  }
+
+  public static getInstance(): DatabaseHandler {
     if (!this._instance) {
       this._instance = new this();
     }

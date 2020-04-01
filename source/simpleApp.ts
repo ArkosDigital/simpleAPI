@@ -3,7 +3,7 @@ import cors from 'cors';
 
 import RouterSingleton from './routes/routerSingleton';
 
-export default class App {
+export default class SimpleApp {
   public express: express.Application;
   public router;
 
@@ -14,12 +14,12 @@ export default class App {
     this.routes();
   }
 
-  private middlewares(): void {
+  protected middlewares(): void {
     this.express.use(express.json());
     this.express.use(cors());
   }
 
-  private routes(): void {
+  protected routes(): void {
     this.router.createRoutes();
     this.express.use(this.router.getRoutes());
   }

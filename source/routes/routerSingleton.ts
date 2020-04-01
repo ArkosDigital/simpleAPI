@@ -5,11 +5,11 @@ export default class RouterSingleton {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   public abstract createRoutes(): void;
-  private static _instance: RouterSingleton;
+  protected static _instance: RouterSingleton;
 
-  private routes: Router;
+  protected routes: Router;
 
-  private constructor() {
+  protected constructor() {
     this.routes = Router();
   }
 

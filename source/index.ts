@@ -11,7 +11,8 @@ import {
 } from 'flexiblepersistence';
 
 import { Mixin } from 'ts-mixer';
-import App from './app';
+import SimpleApp from './simpleApp';
+import DatabaseHandler from './database/databaseHandler';
 import Utils from './utils';
 
 import BaseController from './controllers/baseController';
@@ -53,7 +54,8 @@ import ServiceSimpleModel from './models/serviceSimpleModel';
 import RouterSingleton from './routes/routerSingleton';
 
 export {
-  App,
+  SimpleApp,
+  DatabaseHandler,
   Utils,
   BaseController,
   BaseControllerDefault,

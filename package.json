@@ -1,6 +1,6 @@
 {
   "name": "simple-api-ts",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "main": "source/index.ts",
   "license": "MIT",
   "scripts": {
