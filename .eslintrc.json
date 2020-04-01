@@ -38,13 +38,7 @@
         "argsIgnorePattern": "next"
       }
     ],
-    "no-plusplus": "off",
-    "@typescript-eslint/camelcase": [
-      "error",
-      {
-        "properties": "never"
-      }
-    ]
+    "no-plusplus": "off"
   },
   "settings": {
     "import/resolver": {
