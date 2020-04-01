@@ -1,7 +1,7 @@
 {
   "name": "simple-api-ts",
-  "version": "0.5.6",
-  "main": "source/index.ts",
+  "version": "0.5.7",
+  "main": "dist/source/index.js",
   "license": "MIT",
   "scripts": {
     "postinstall": "",
