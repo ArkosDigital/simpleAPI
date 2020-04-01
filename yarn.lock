@@ -1953,10 +1953,10 @@ flatted@^2.0.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.1.tgz#69e57caa8f0eacbc281d2e2cb458d46fdb449e08"
   integrity sha512-a1hQMktqW9Nmqr5aktAux3JMNqaucxGcjtjWnZLHX7yyPCmlSV3M54nGYbqT8K+0GhF3NBgmJCc3ma+WOgX8Jg==
 
-flexiblepersistence@^1.0.52:
-  version "1.0.52"
-  resolved "https://registry.yarnpkg.com/flexiblepersistence/-/flexiblepersistence-1.0.52.tgz#49c9712c88f7860759a43c042d792d6855606ed4"
-  integrity sha512-26nStzHXiTefdGi36uogS0vRm1F3a6qRW+2WGkmOrzM++jBzpSZiqCla7CJZZXC3xHYu5hsTRjjBZEb+PnsIqg==
+flexiblepersistence@^1.0.54:
+  version "1.0.54"
+  resolved "https://registry.yarnpkg.com/flexiblepersistence/-/flexiblepersistence-1.0.54.tgz#2eae4f771a7be78a9836bfbef4e02831eb3c1c95"
+  integrity sha512-44KKZ7Pna/a2zhRHeiBjPEVyodtStbnzf5Cn7/BsjiXqWItXcV8Ssm07d5XvEha3VKYdQMH0vB1S6Lwg0RASTQ==
   dependencies:
     mongodb "3.5.5"
     mongoose "5.9.5"

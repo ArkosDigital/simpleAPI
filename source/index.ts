@@ -13,6 +13,7 @@ import {
 import { Mixin } from 'ts-mixer';
 import SimpleApp from './simpleApp';
 import DatabaseHandler from './database/databaseHandler';
+import ServiceAdapter from './interfaces/service/serviceAdapter';
 import Utils from './utils';
 
 import BaseController from './controllers/baseController';
@@ -56,6 +57,7 @@ import RouterSingleton from './routes/routerSingleton';
 export {
   SimpleApp,
   DatabaseHandler,
+  ServiceAdapter,
   Utils,
   BaseController,
   BaseControllerDefault,

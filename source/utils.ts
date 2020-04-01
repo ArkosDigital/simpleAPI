@@ -3,11 +3,11 @@ import * as fs from 'fs';
 export default class Utils {
   public static async init(pool): Promise<void> {
     const createScript = await fs.promises.readFile(
-      './database/create_extension.sql',
+      './database/createExtension.sql',
       'utf8'
     );
     const script = await fs.promises.readFile(
-      './database/create_tables.sql',
+      './database/createTables.sql',
       'utf8'
     );
     await pool.query(createScript + script);
@@ -15,7 +15,7 @@ export default class Utils {
 
   public static async populate(pool): Promise<void> {
     const populateTables = await fs.promises.readFile(
-      './database/insert_db.sql',
+      './database/insertDB.sql',
       'utf8'
     );
     await pool.query(populateTables);
@@ -23,7 +23,7 @@ export default class Utils {
 
   public static async dropTables(pool): Promise<void> {
     const dropTables = await fs.promises.readFile(
-      './database/drop_script.sql',
+      './database/dropScript.sql',
       'utf8'
     );
     await pool.query(dropTables);

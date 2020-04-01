@@ -17,7 +17,7 @@ export default class BaseServiceStore extends BaseServiceDefault
     // Event Sourcing
     const event = await this.handler.addEvent(
       new Event({
-        operation: Operation.add,
+        operation: Operation.create,
         name: this.element,
         content,
       })

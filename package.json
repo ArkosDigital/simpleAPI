@@ -1,6 +1,6 @@
 {
   "name": "simple-api-ts",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "main": "dist/source/index.js",
   "license": "MIT",
   "scripts": {
@@ -17,7 +17,7 @@
     "bignumber.js": "^9.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "flexiblepersistence": "^1.0.52",
+    "flexiblepersistence": "^1.0.54",
     "ts-mixer": "^5.1.0"
   },
   "devDependencies": {
