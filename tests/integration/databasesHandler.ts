@@ -1,12 +1,9 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-underscore-dangle */
 import { Handler } from 'flexiblepersistence';
 import { Pool } from 'pg';
 
 import database from './database';
 import eventDatabase from './eventDatabase';
-import { DatabaseHandler, ServiceAdapter, Utils } from '../../source';
+import { DatabaseHandler, ServiceAdapter, Utils } from '../../source/index';
 
 // TODO: ADD: Services
 const postgres = new Pool(database);
