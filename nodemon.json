@@ -2,7 +2,7 @@
   "verbose": true,
   "restartable": "rs",
   "watch": [
-    "src"
+    "source"
   ],
   "execMap": {
     "ts": "node --require sucrase/register"

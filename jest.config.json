@@ -6,7 +6,7 @@
   "clearMocks": true,
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "src/**"
+    "source/**"
   ],
   "coverageDirectory": "test/unit/coverage",
   "testEnvironment": "node",
