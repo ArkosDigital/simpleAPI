@@ -13,18 +13,18 @@ import {
 import { Mixin } from 'ts-mixer';
 import SimpleApp from './simpleApp';
 import DatabaseHandler from './database/databaseHandler';
-import ServiceAdapter from './interfaces/service/serviceAdapter';
+import ServiceAdapter from './adapter/service/serviceAdapter';
 import Utils from './utils';
 
-import BaseController from './controllers/baseController';
-import BaseControllerDefault from './controllers/baseControllerDefault';
-import BaseControllerDelete from './controllers/baseControllerDelete';
-import BaseControllerIndex from './controllers/baseControllerIndex';
-import BaseControllerReserved from './controllers/baseControllerReserved';
-import BaseControllerRestricted from './controllers/baseControllerRestricted';
-import BaseControllerShow from './controllers/baseControllerShow';
-import BaseControllerStore from './controllers/baseControllerStore';
-import BaseControllerUpdate from './controllers/baseControllerUpdate';
+import BaseController from './controller/baseController';
+import BaseControllerDefault from './controller/baseControllerDefault';
+import BaseControllerDelete from './controller/baseControllerDelete';
+import BaseControllerIndex from './controller/baseControllerIndex';
+import BaseControllerReserved from './controller/baseControllerReserved';
+import BaseControllerRestricted from './controller/baseControllerRestricted';
+import BaseControllerShow from './controller/baseControllerShow';
+import BaseControllerStore from './controller/baseControllerStore';
+import BaseControllerUpdate from './controller/baseControllerUpdate';
 
 import BaseDAO from './dAO/baseDAO';
 import BaseDAODefault from './dAO/baseDAODefault';
@@ -37,22 +37,22 @@ import BaseDAOUpdate from './dAO/baseDAOUpdate';
 import BaseDAOSimple from './dAO/baseDAOSimple';
 import BaseDAORestrictedDefault from './dAO/baseDAORestrictedDefault';
 
-import BaseService from './services/baseService';
-import BaseServiceDefault from './services/baseServiceDefault';
-import BaseServiceDelete from './services/baseServiceDelete';
-import BaseServiceReserved from './services/baseServiceReserved';
-import BaseServiceRestricted from './services/baseServiceRestricted';
-import BaseServiceSelectById from './services/baseServiceSelectById';
-import BaseServiceSelectAll from './services/baseServiceSelectAll';
-import BaseServiceStore from './services/baseServiceStore';
-import BaseServiceUpdate from './services/baseServiceUpdate';
+import BaseService from './service/baseService';
+import BaseServiceDefault from './service/baseServiceDefault';
+import BaseServiceDelete from './service/baseServiceDelete';
+import BaseServiceReserved from './service/baseServiceReserved';
+import BaseServiceRestricted from './service/baseServiceRestricted';
+import BaseServiceSelectById from './service/baseServiceSelectById';
+import BaseServiceSelectAll from './service/baseServiceSelectAll';
+import BaseServiceStore from './service/baseServiceStore';
+import BaseServiceUpdate from './service/baseServiceUpdate';
 
-import DAOModel from './models/dAOModel';
-import DAOSimpleModel from './models/dAOSimpleModel';
-import ServiceModel from './models/serviceModel';
-import ServiceSimpleModel from './models/serviceSimpleModel';
+import DAOModel from './model/dAOModel';
+import DAOSimpleModel from './model/dAOSimpleModel';
+import ServiceModel from './model/serviceModel';
+import ServiceSimpleModel from './model/serviceSimpleModel';
 
-import RouterSingleton from './routes/routerSingleton';
+import RouterSingleton from './router/routerSingleton';
 
 import { Pool } from 'pg';
 

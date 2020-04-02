@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Handler } from 'flexiblepersistence';
-import ServiceAdapter from '../interfaces/service/serviceAdapter';
+import ServiceAdapter from '../adapter/service/serviceAdapter';
 // @ts-ignore
 export default class DatabaseHandler {
   // @ts-ignore

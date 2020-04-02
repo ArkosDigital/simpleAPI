@@ -1,6 +1,6 @@
-import DAOModel from '../models/dAOModel';
-import DAOSimpleModel from '../models/dAOSimpleModel';
-import DAOUpdateAdapter from '../interfaces/dAO/dAOUpdateAdapter';
+import DAOModel from '../model/dAOModel';
+import DAOSimpleModel from '../model/dAOSimpleModel';
+import DAOUpdateAdapter from '../adapter/dAO/dAOUpdateAdapter';
 import BaseDAORestrictedDefault from './baseDAORestrictedDefault';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore

@@ -1,4 +1,4 @@
-import DAOSimpleModel from '../models/dAOSimpleModel';
+import DAOSimpleModel from '../model/dAOSimpleModel';
 import BaseDAODefault from './baseDAODefault';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore

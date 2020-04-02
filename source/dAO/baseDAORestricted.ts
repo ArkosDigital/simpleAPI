@@ -1,4 +1,4 @@
-import DAORestrictedAdapter from '../interfaces/dAO/dAORestrictedAdapter';
+import DAORestrictedAdapter from '../adapter/dAO/dAORestrictedAdapter';
 import BaseDAOSimple from './baseDAOSimple';
 import BaseDAOStore from './baseDAOStore';
 import BaseDAOUpdate from './baseDAOUpdate';

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import DAOModel from '../models/dAOModel';
+import DAOModel from '../model/dAOModel';
 import BaseDAODefault from './baseDAODefault';
-import DAOSelectAllAdapter from '../interfaces/dAO/dAOSelectAllAdapter';
+import DAOSelectAllAdapter from '../adapter/dAO/dAOSelectAllAdapter';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class BaseDAOSelectAll extends BaseDAODefault

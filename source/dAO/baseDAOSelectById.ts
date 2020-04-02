@@ -1,5 +1,5 @@
-import DAOModel from '../models/dAOModel';
-import DAOSelectByIdAdapter from '../interfaces/dAO/dAOSelectByIdAdapter';
+import DAOModel from '../model/dAOModel';
+import DAOSelectByIdAdapter from '../adapter/dAO/dAOSelectByIdAdapter';
 import BaseDAODefault from './baseDAODefault';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore

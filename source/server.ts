@@ -1,6 +1,6 @@
 import App from './simpleApp';
 import databaseHandler from './database/databaseHandler';
-import RouterSingleton from './routes/routerSingleton';
+import RouterSingleton from './router/routerSingleton';
 // Sample
 const app = new App(RouterSingleton.getInstance()).express;
 

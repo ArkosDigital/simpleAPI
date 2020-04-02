@@ -1,4 +1,4 @@
-import DAODeleteAdapter from '../interfaces/dAO/dAODeleteAdapter';
+import DAODeleteAdapter from '../adapter/dAO/dAODeleteAdapter';
 import BaseDAODefault from './baseDAODefault';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
