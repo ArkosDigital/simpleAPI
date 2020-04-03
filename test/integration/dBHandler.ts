@@ -1,17 +1,21 @@
+import { Handler } from 'flexiblepersistence';
 import database from './database';
 import eventDatabase from './eventDatabase';
 import {
   DatabaseHandler,
-  ServiceAdapter,
   Utils,
   Pool,
-  Handler,
+  ServiceAdapter,
+  Journaly,
 } from '../../source/index';
+import TestService from './testService';
+import TestDAO from './testDAO';
 
 // TODO: ADD: Services
 const postgres = new Pool(database);
 const handler = new Handler(eventDatabase);
-class DatabasesHandler extends DatabaseHandler {
+
+class DBHandler extends DatabaseHandler {
   protected eventHandler = handler;
   protected readPool = postgres;
   protected service: {
@@ -22,6 +26,12 @@ class DatabasesHandler extends DatabaseHandler {
 
   public async migrate(): Promise<boolean> {
     try {
+      const journaly = new Journaly(false);
+      const testService = new TestService(
+        this.getEventHandler(),
+        journaly,
+        new TestDAO(this.getReadPool())
+      );
       const events = await this.eventHandler.readArray('events', {});
       await Utils.dropTables(this.getReadPool());
       await Utils.init(this.getReadPool());
@@ -45,6 +55,11 @@ class DatabasesHandler extends DatabaseHandler {
           }
         }
       }
+      const all = await testService.selectAll();
+      if (!all || all.length < 1) {
+        // testService.store({});
+        journaly.publish('TestService.store', {});
+      }
     } catch (error) {
       return new Promise((resolve, reject) => reject(error));
     }
@@ -53,4 +68,4 @@ class DatabasesHandler extends DatabaseHandler {
   }
 }
 
-export default DatabasesHandler.getInstance();
+export default DBHandler.getInstance();

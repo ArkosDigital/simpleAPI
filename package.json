@@ -22,6 +22,7 @@
     "bignumber.js": "9.0.0",
     "cors": "2.8.5",
     "express": "4.17.1",
+    "journaly": "0.1.0",
     "flexiblepersistence": "1.0.56",
     "ts-mixer": "5.1.0",
     "pg": "8.0.0"
