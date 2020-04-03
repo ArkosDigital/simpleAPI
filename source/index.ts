@@ -10,6 +10,7 @@ import {
   PostgresDB,
 } from 'flexiblepersistence';
 
+import { Journaly } from 'journaly';
 import { Mixin } from 'ts-mixer';
 import SimpleApp from './simpleApp';
 import DatabaseHandler from './database/databaseHandler';
@@ -61,6 +62,7 @@ export {
   DatabaseHandler,
   ServiceAdapter,
   Utils,
+  Journaly,
   BaseController,
   BaseControllerDefault,
   BaseControllerDelete,

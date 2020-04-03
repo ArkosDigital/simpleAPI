@@ -1,4 +1,2 @@
 
-DELETE FROM object;
-DELETE FROM object2;
-DELETE FROM object3;
+DELETE FROM Tests;
