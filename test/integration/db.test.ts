@@ -1,4 +1,4 @@
-import databasesHandler from './databasesHandler';
+import databasesHandler from './dBHandler';
 import Utils from '../../source/utils';
 
 test('populate db', async done => {
