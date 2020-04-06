@@ -1,4 +1,4 @@
-import { DatabaseInfo } from '../../source/index';
+import { DatabaseInfo } from 'flexiblepersistence';
 
 const database = new DatabaseInfo({
   database: 'postgres',

@@ -3,31 +3,19 @@ import BaseServiceDefault from './baseServiceDefault';
 import ServiceSimpleModel from '../model/serviceSimpleModel';
 import ServiceModel from '../model/serviceModel';
 import { Event, Operation } from 'flexiblepersistence';
-import { Journaly } from 'journaly';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class BaseServiceStore extends BaseServiceDefault
   implements ServiceStoreAdapter {
-  private initJournaly(): void {
-    console.log('store:', this.className);
+  protected initJournaly(): void {
+    console.log('store:', this.element);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _self = this;
+    _self.journaly.subscribe(this.element + '.' + 'store', _self.store);
     _self.journaly.subscribe(
-      this.className + '.' + 'store',
-      (content: ServiceSimpleModel) => {
-        _self.store(content);
-      }
+      this.element + '.' + 'storeElement',
+      _self.storeElement
     );
-    _self.journaly.subscribe(
-      this.className + '.' + 'storeElement',
-      (content: ServiceSimpleModel) => {
-        _self.storeElement(content);
-      }
-    );
-  }
-  constructor(handler, journaly: Journaly) {
-    super(handler, journaly);
-    this.initJournaly();
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore

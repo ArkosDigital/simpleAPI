@@ -1,5 +1,6 @@
-import { Handler } from 'flexiblepersistence';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import database from './database';
+import { Handler } from 'flexiblepersistence';
 import eventDatabase from './eventDatabase';
 import {
   DatabaseHandler,
@@ -24,14 +25,33 @@ class DBHandler extends DatabaseHandler {
     // example: exampleService,
   };
 
+  protected journaly: Journaly<any>;
+
+  public getJournaly(): Journaly<any> {
+    return this.journaly;
+  }
+
+  protected constructor() {
+    super();
+    this.journaly = new Journaly<any>(false);
+    this.testDAO = new TestDAO(this.getReadPool());
+    this.testService = new TestService(
+      this.getEventHandler(),
+      this.journaly,
+      new TestDAO(this.getReadPool())
+    );
+  }
+  protected testDAO: TestDAO;
+  public getTestDAO(): TestDAO {
+    return this.testDAO;
+  }
+  protected testService: TestService;
+  public getTestService(): TestService {
+    return this.testService;
+  }
+
   public async migrate(): Promise<boolean> {
     try {
-      const journaly = new Journaly(false);
-      const testService = new TestService(
-        this.getEventHandler(),
-        journaly,
-        new TestDAO(this.getReadPool())
-      );
       const events = await this.eventHandler.readArray('events', {});
       await Utils.dropTables(this.getReadPool());
       await Utils.init(this.getReadPool());
@@ -55,17 +75,16 @@ class DBHandler extends DatabaseHandler {
           }
         }
       }
-      const all = await testService.selectAll();
+      const all = await this.journaly.publish('tests.selectAll')[0];
       if (!all || all.length < 1) {
-        // testService.store({});
-        journaly.publish('TestService.store', {});
+        await this.journaly.publish('tests.store', {});
       }
     } catch (error) {
       return new Promise((resolve, reject) => reject(error));
     }
 
-    return new Promise(resolve => resolve(true));
+    return new Promise((resolve) => resolve(true));
   }
 }
 
-export default DBHandler.getInstance();
+export default DBHandler.getInstance() as DBHandler;

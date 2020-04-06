@@ -17,6 +17,6 @@ export default class TestDAO extends BaseDAO {
     let values;
     if (content.id) values = [content.id];
     else values = [];
-    return new Promise(resolve => resolve(values));
+    return new Promise((resolve) => resolve(values));
   }
 }
