@@ -4,40 +4,39 @@ import {
   ServiceSimpleModel,
   Journaly,
 } from '../../source/index';
-export default class TestService extends BaseService {
-  protected element = 'tests';
+export default class Test2Service extends BaseService {
+  protected element = 'tests2';
 
   protected testDAO;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(handler, journaly: Journaly<any>, testDAO) {
+  constructor(handler, journaly: Journaly<any>) {
     super(handler, journaly);
-    this.testDAO = testDAO;
   }
 
   public async selectElementById(id: string): Promise<ServiceModel> {
-    return this.testDAO.selectById(id);
+    return this.journaly.publish('tests.selectElementById', id)[0];
   }
 
   public async selectAllElements(): Promise<Array<ServiceModel>> {
-    return this.testDAO.selectAll();
+    return this.journaly.publish('tests.selectAllElements')[0];
   }
 
   public async storeElement(
     content: ServiceSimpleModel
   ): Promise<ServiceModel> {
-    return this.testDAO.store(content);
+    return this.journaly.publish('tests.store', content)[0];
   }
 
   public async updateElement(
     id: string,
     content: ServiceSimpleModel
   ): Promise<ServiceModel> {
-    return this.testDAO.update(id, content);
+    return this.journaly.publish('tests.update', id, content)[0];
   }
 
   public async deleteElement(id: string): Promise<boolean> {
-    return this.testDAO.delete(id);
+    return this.journaly.publish('tests.delete', id)[0];
   }
 
   public selectById(id: string): Promise<ServiceModel> {

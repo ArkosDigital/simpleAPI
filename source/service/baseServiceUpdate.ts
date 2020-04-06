@@ -31,4 +31,15 @@ export default class BaseServiceUpdate extends BaseServiceDefault
     const result = await this.updateElement(id, content);
     return result;
   }
+
+  protected initJournaly(): void {
+    console.log('store:', this.element);
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const _self = this;
+    _self.journaly.subscribe(this.element + '.' + 'update', _self.update);
+    _self.journaly.subscribe(
+      this.element + '.' + 'updateElement',
+      _self.updateElement
+    );
+  }
 }

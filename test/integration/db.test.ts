@@ -1,15 +1,14 @@
-import databasesHandler from './dBHandler';
-import Utils from '../../source/utils';
+import TestUtils from './testUtils';
 
-test('populate db', async done => {
+test('populate db', async (done) => {
   try {
-    await Utils.init(databasesHandler.getReadPool());
-    await Utils.populate(databasesHandler.getReadPool());
+    await TestUtils.init();
+    await TestUtils.populate();
   } catch (error) {
-    await Utils.end(databasesHandler.getReadPool());
+    await TestUtils.end();
     expect(error).toBe(null);
     done();
   }
-  await Utils.end(databasesHandler.getReadPool());
+  await TestUtils.end();
   done();
 });
