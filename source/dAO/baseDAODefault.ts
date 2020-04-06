@@ -17,12 +17,12 @@ export default class BaseDAODefault {
   protected selectJoin = '';
   protected async generateSelect(alias: string): Promise<string> {
     const select = `SELECT ${this.values} FROM ${alias} AS element ${this.selectJoin}`;
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       resolve(select);
     });
   }
   protected fixDate(rows: Array<any>, field: string): any {
-    rows = rows.map(row => {
+    rows = rows.map((row) => {
       row[field] = new Date(row[field]).toISOString();
       return row;
     });
@@ -30,7 +30,7 @@ export default class BaseDAODefault {
   }
 
   protected fixBigNumber(rows: Array<any>, field: string): any {
-    rows = rows.map(row => {
+    rows = rows.map((row) => {
       row[field] = new BigNumber(row[field]).toString();
       return row;
     });
@@ -38,7 +38,7 @@ export default class BaseDAODefault {
   }
 
   protected fixUndefined(rows: Array<any>, field: string): any {
-    rows = rows.map(row => {
+    rows = rows.map((row) => {
       row[field] = !row[field] ? undefined : row[field];
       return row;
     });
