@@ -16,11 +16,11 @@ export default class BaseServiceStore extends BaseServiceDefault
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _self = this;
     console.log(this.element + '.' + 'store', _self.store);
-    this.journaly.subscribe(this.element + '.' + 'store', _self.store);
-    this.journaly.subscribe(
-      this.element + '.' + 'storeElement',
-      _self.storeElement
-    );
+    // this.journaly.subscribe(this.element + '.' + 'store', _self.store);
+    // this.journaly.subscribe(
+    //   this.element + '.' + 'storeElement',
+    //   _self.storeElement
+    // );
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore

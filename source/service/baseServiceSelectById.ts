@@ -21,10 +21,10 @@ export default class BaseServiceSelectById extends BaseServiceDefault
     super.init(handler, journaly);
     console.log('store:', this.element);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    this.journaly.subscribe(this.element + '.' + 'selectById', this.selectById);
-    this.journaly.subscribe(
-      this.element + '.' + 'selectElementById',
-      this.selectElementById
-    );
+    // this.journaly.subscribe(this.element + '.' + 'selectById', this.selectById);
+    // this.journaly.subscribe(
+    //   this.element + '.' + 'selectElementById',
+    //   this.selectElementById
+    // );
   }
 }
