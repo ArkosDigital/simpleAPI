@@ -3,6 +3,9 @@ import BaseServiceDefault from './baseServiceDefault';
 import ServiceSimpleModel from '../model/serviceSimpleModel';
 import ServiceModel from '../model/serviceModel';
 import { Event, Operation } from 'flexiblepersistence';
+import { settings } from 'ts-mixer';
+import { Journaly } from 'journaly';
+settings.initFunction = 'init';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class BaseServiceUpdate extends BaseServiceDefault
@@ -32,14 +35,14 @@ export default class BaseServiceUpdate extends BaseServiceDefault
     return result;
   }
 
-  protected initJournaly(): void {
+  protected init(handler, journaly: Journaly<any>): void {
+    super.init(handler, journaly);
     console.log('store:', this.element);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _self = this;
-    _self.journaly.subscribe(this.element + '.' + 'update', _self.update);
-    _self.journaly.subscribe(
+    this.journaly.subscribe(this.element + '.' + 'update', this.update);
+    this.journaly.subscribe(
       this.element + '.' + 'updateElement',
-      _self.updateElement
+      this.updateElement
     );
   }
 }

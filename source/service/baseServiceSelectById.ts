@@ -1,6 +1,9 @@
 import ServiceModel from '../model/serviceModel';
 import ServiceSelectByIdAdapter from '../adapter/service/serviceSelectByIdAdapter';
 import BaseServiceDefault from './baseServiceDefault';
+import { settings } from 'ts-mixer';
+import { Journaly } from 'journaly';
+settings.initFunction = 'init';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class BaseServiceSelectById extends BaseServiceDefault
@@ -14,17 +17,14 @@ export default class BaseServiceSelectById extends BaseServiceDefault
     return result;
   }
 
-  protected initJournaly(): void {
+  protected init(handler, journaly: Journaly<any>): void {
+    super.init(handler, journaly);
     console.log('store:', this.element);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _self = this;
-    _self.journaly.subscribe(
-      this.element + '.' + 'selectById',
-      _self.selectById
-    );
-    _self.journaly.subscribe(
+    this.journaly.subscribe(this.element + '.' + 'selectById', this.selectById);
+    this.journaly.subscribe(
       this.element + '.' + 'selectElementById',
-      _self.selectElementById
+      this.selectElementById
     );
   }
 }

@@ -38,7 +38,7 @@ class DBHandler extends DatabaseHandler {
     this.testService = new TestService(
       this.getEventHandler(),
       this.journaly,
-      new TestDAO(this.getReadPool())
+      this.testDAO
     );
   }
   protected testDAO: TestDAO;

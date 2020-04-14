@@ -6,8 +6,9 @@ test('store person, update, select all, select by id person and delete it', asyn
     // Inicializa o banco de dados
     await Utils.init(dBHandler.getReadPool());
     const createdPerson = (
-      await dBHandler.getJournaly().publish('tests.store')
+      await dBHandler.getJournaly().publish('TestService.store')
     )[0];
+    console.log(createdPerson);
     const expectedPerson = {
       id: createdPerson.id,
     };
