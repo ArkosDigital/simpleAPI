@@ -1,14 +1,23 @@
 import BigNumber from 'bignumber.js';
+import { Journaly } from 'journaly';
+import { settings } from 'ts-mixer';
+settings.initFunction = 'init';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default class BaseDAODefault {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
-  protected abstract table: string;
-
-  constructor(pool) {
+  protected table: string;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  protected element: string;
+  protected init(pool, journaly: Journaly<any>): void {
     this.pool = pool;
+    this.journaly = journaly;
+    this.table = this.constructor.name; //TODO: modify to DB structure
+    this.element = this.constructor.name;
   }
 
+  protected journaly;
   protected pool;
 
   protected groupBy = '';
