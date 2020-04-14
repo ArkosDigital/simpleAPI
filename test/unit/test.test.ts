@@ -1,24 +1,20 @@
 import { Mixin, settings } from 'ts-mixer';
 settings.initFunction = 'init';
 
-const assignObject = (type, object) => {
-  return Object.assign(new type(), object);
-};
-
 abstract class ClassA {
   public name;
 
   constructor() {
     this.name = this.constructor.name;
   }
-  init() {
+  init(): void {
     this.name = this.constructor.name;
   }
 }
 
 class ClassB extends ClassA {
   public name1;
-  init() {
+  init(): void {
     super.init();
     this.name1 = this.name + 1;
   }
@@ -26,7 +22,7 @@ class ClassB extends ClassA {
 
 class ClassC extends ClassA {
   public name2;
-  init() {
+  init(): void {
     super.init();
     this.name2 = this.name + 2;
   }
@@ -34,7 +30,7 @@ class ClassC extends ClassA {
 
 class ClassD extends ClassA {
   public name3;
-  init() {
+  init(): void {
     super.init();
     this.name3 = this.name + 3;
   }
@@ -43,6 +39,13 @@ class ClassD extends ClassA {
 class ClassE extends Mixin(ClassB, ClassC) {}
 
 class ClassF extends Mixin(ClassE, ClassD) {}
+
+const assignObject = (
+  type,
+  object: Record<string, unknown>
+): Record<string, unknown> => {
+  return Object.assign(new type(), object);
+};
 
 test('test Mixin', async (done) => {
   const b = new ClassB();
