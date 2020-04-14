@@ -1,5 +1,5 @@
-import { BaseDAO, DAOSimpleModel } from '../../source/index';
-
+import { BaseDAO, DAOSimpleModel, Journaly } from '../../source/index';
+/* eslint-disable no-unused-vars */
 export default class TestDAO extends BaseDAO {
   protected table = 'tests';
 
@@ -10,6 +10,10 @@ export default class TestDAO extends BaseDAO {
   protected insertValues = '$1';
 
   protected updateQuery = '';
+
+  constructor(pool, journaly: Journaly<any>) {
+    super();
+  }
 
   protected generateVectorValues(
     content: DAOSimpleModel

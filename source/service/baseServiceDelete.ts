@@ -4,7 +4,7 @@ import { Event, Operation } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
 import { Journaly } from 'journaly';
 settings.initFunction = 'init';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 export default class BaseServiceDelete extends BaseServiceDefault
   implements ServiceDeleteAdapter {

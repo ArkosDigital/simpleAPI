@@ -5,43 +5,34 @@ import {
   ServiceSimpleModel,
   Journaly,
 } from '../../source/index';
-import { settings } from 'ts-mixer';
-settings.initFunction = 'init';
 export default class TestService extends BaseService {
-  protected testDAO;
-
-  constructor(handler, journaly: Journaly<any>, testDAO) {
+  constructor(handler, journaly: Journaly<any>) {
     super();
-    this.testDAO = testDAO;
-  }
-
-  protected init(handler, journaly: Journaly<any>): void {
-    super.init(handler, journaly);
   }
 
   public async selectElementById(id: string): Promise<ServiceModel> {
-    return this.testDAO.selectById(id);
+    return (await this.journaly.publish('TestDAO.selectById', id))[0];
   }
 
   public async selectAllElements(): Promise<Array<ServiceModel>> {
-    return this.testDAO.selectAll();
+    return (await this.journaly.publish('TestDAO.selectAll'))[0];
   }
 
   public async storeElement(
     content: ServiceSimpleModel
   ): Promise<ServiceModel> {
-    return this.testDAO.store(content);
+    return (await this.journaly.publish('TestDAO.store', content))[0];
   }
 
   public async updateElement(
     id: string,
     content: ServiceSimpleModel
   ): Promise<ServiceModel> {
-    return this.testDAO.update(id, content);
+    return (await this.journaly.publish('TestDAO.update', id, content))[0];
   }
 
   public async deleteElement(id: string): Promise<boolean> {
-    return this.testDAO.delete(id);
+    return (await this.journaly.publish('TestDAO.delete', id))[0];
   }
 
   public selectById(id: string): Promise<ServiceModel> {

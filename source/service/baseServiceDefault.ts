@@ -2,9 +2,15 @@
 import { Journaly } from 'journaly';
 import { settings } from 'ts-mixer';
 settings.initFunction = 'init';
-export default abstract class BaseServiceDefault {
-  protected journaly;
-  protected element;
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+// @ts-ignore
+export default class BaseServiceDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  protected journaly: Journaly<any>;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  protected element: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected handler: any;
   protected init(handler, journaly: Journaly<any>): void {
@@ -12,10 +18,4 @@ export default abstract class BaseServiceDefault {
     this.journaly = journaly;
     this.element = this.constructor.name;
   }
-
-  // constructor(handler, journaly: Journaly<any>) {
-  //   this.handler = handler;
-  //   this.journaly = journaly;
-  //   this.element = this.constructor.name;
-  // }
 }
