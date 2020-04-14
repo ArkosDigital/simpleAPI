@@ -1,19 +1,20 @@
 import ServiceDeleteAdapter from '../adapter/service/serviceDeleteAdapter';
 import BaseServiceDefault from './baseServiceDefault';
 import { Event, Operation } from 'flexiblepersistence';
+import { settings } from 'ts-mixer';
+import { Journaly } from 'journaly';
+settings.initFunction = 'init';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class BaseServiceDelete extends BaseServiceDefault
   implements ServiceDeleteAdapter {
-  protected initJournaly(): void {
+  protected init(handler, journaly: Journaly<any>): void {
+    super.init(handler, journaly);
     console.log('delete:', this.element);
-
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _self = this;
-    _self.journaly.subscribe(this.element + '.' + 'delete', _self.delete);
-    _self.journaly.subscribe(
+    this.journaly.subscribe(this.element + '.' + 'delete', this.delete);
+    this.journaly.subscribe(
       this.element + '.' + 'deleteElement',
-      _self.deleteElement
+      this.deleteElement
     );
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
