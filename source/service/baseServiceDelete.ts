@@ -11,11 +11,11 @@ export default class BaseServiceDelete extends BaseServiceDefault
   protected init(handler, journaly: Journaly<any>): void {
     super.init(handler, journaly);
     console.log('delete:', this.element);
-    this.journaly.subscribe(this.element + '.' + 'delete', this.delete);
-    this.journaly.subscribe(
-      this.element + '.' + 'deleteElement',
-      this.deleteElement
-    );
+    // this.journaly.subscribe(this.element + '.' + 'delete', this.delete);
+    // this.journaly.subscribe(
+    //   this.element + '.' + 'deleteElement',
+    //   this.deleteElement
+    // );
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore

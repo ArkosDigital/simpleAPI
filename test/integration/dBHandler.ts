@@ -75,9 +75,9 @@ class DBHandler extends DatabaseHandler {
           }
         }
       }
-      const all = await this.journaly.publish('tests.selectAll')[0];
+      const all = await this.journaly.publish('TestService.selectAll')[0];
       if (!all || all.length < 1) {
-        await this.journaly.publish('tests.store', {});
+        await this.journaly.publish('TestService.store', {});
       }
     } catch (error) {
       return new Promise((resolve, reject) => reject(error));

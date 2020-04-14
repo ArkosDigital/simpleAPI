@@ -1,18 +1,22 @@
+/* eslint-disable no-unused-vars */
 import {
   BaseService,
   ServiceModel,
   ServiceSimpleModel,
   Journaly,
 } from '../../source/index';
+import { settings } from 'ts-mixer';
+settings.initFunction = 'init';
 export default class TestService extends BaseService {
-  protected element = 'tests';
-
   protected testDAO;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(handler, journaly: Journaly<any>, testDAO) {
-    super(handler, journaly);
+    super();
     this.testDAO = testDAO;
+  }
+
+  protected init(handler, journaly: Journaly<any>): void {
+    super.init(handler, journaly);
   }
 
   public async selectElementById(id: string): Promise<ServiceModel> {

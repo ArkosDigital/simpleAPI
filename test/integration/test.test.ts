@@ -13,8 +13,10 @@ test('store person, update, select all, select by id person and delete it', asyn
       id: createdPerson.id,
     };
     expect(createdPerson).toStrictEqual(expectedPerson);
-    await dBHandler.getJournaly().publish('tests.store');
-    const all = (await dBHandler.getJournaly().publish('tests.selectAll'))[0];
+    await dBHandler.getJournaly().publish('TestService.store');
+    const all = (
+      await dBHandler.getJournaly().publish('TestService.selectAll')
+    )[0];
 
     expect(all).toStrictEqual([expectedPerson]);
   } catch (error) {

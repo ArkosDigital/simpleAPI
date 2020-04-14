@@ -20,10 +20,10 @@ export default class BaseServiceSelectAll extends BaseServiceDefault
     super.init(handler, journaly);
     console.log('store:', this.element);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    this.journaly.subscribe(this.element + '.' + 'selectAll', this.selectAll);
-    this.journaly.subscribe(
-      this.element + '.' + 'selectAllElements',
-      this.selectAllElements
-    );
+    // this.journaly.subscribe(this.element + '.' + 'selectAll', this.selectAll);
+    // this.journaly.subscribe(
+    //   this.element + '.' + 'selectAllElements',
+    //   this.selectAllElements
+    // );
   }
 }

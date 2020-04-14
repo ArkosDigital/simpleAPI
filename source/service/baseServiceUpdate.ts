@@ -39,10 +39,10 @@ export default class BaseServiceUpdate extends BaseServiceDefault
     super.init(handler, journaly);
     console.log('store:', this.element);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    this.journaly.subscribe(this.element + '.' + 'update', this.update);
-    this.journaly.subscribe(
-      this.element + '.' + 'updateElement',
-      this.updateElement
-    );
+    // this.journaly.subscribe(this.element + '.' + 'update', this.update);
+    // this.journaly.subscribe(
+    //   this.element + '.' + 'updateElement',
+    //   this.updateElement
+    // );
   }
 }
