@@ -2,17 +2,24 @@ import DAOModel from '../model/dAOModel';
 import DAOSimpleModel from '../model/dAOSimpleModel';
 import DAOUpdateAdapter from '../adapter/dAO/dAOUpdateAdapter';
 import BaseDAORestrictedDefault from './baseDAORestrictedDefault';
+import { Journaly } from 'journaly';
+import { settings } from 'ts-mixer';
+settings.initFunction = 'init';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class BaseDAOUpdate extends BaseDAORestrictedDefault
   implements DAOUpdateAdapter {
+  protected init(pool, journaly: Journaly<any>): void {
+    super.init(pool, journaly);
+    // this.journaly.subscribe(this.element + '.' + 'update', this.update);
+  }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   protected abstract updateQuery: string;
 
   protected async generateUpdate(): Promise<string> {
     const update = `UPDATE ${this.table} SET ${this.updateQuery}`;
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       resolve(update);
     });
   }

@@ -34,12 +34,8 @@ class DBHandler extends DatabaseHandler {
   protected constructor() {
     super();
     this.journaly = new Journaly<any>(false);
-    this.testDAO = new TestDAO(this.getReadPool());
-    this.testService = new TestService(
-      this.getEventHandler(),
-      this.journaly,
-      this.testDAO
-    );
+    this.testDAO = new TestDAO(this.getReadPool(), this.journaly);
+    this.testService = new TestService(this.getEventHandler(), this.journaly);
   }
   protected testDAO: TestDAO;
   public getTestDAO(): TestDAO {

@@ -3,9 +3,16 @@ import DAOModel from '../model/dAOModel';
 import DAOSimpleModel from '../model/dAOSimpleModel';
 import DAOStoreAdapter from '../adapter/dAO/dAOStoreAdapter';
 import BaseDAORestrictedDefault from './baseDAORestrictedDefault';
+import { Journaly } from 'journaly';
+import { settings } from 'ts-mixer';
+settings.initFunction = 'init';
 // @ts-ignore
 export default class BaseDAOStore extends BaseDAORestrictedDefault
   implements DAOStoreAdapter {
+  protected init(pool, journaly: Journaly<any>): void {
+    super.init(pool, journaly);
+    // this.journaly.subscribe(this.element + '.' + 'store', this.store);
+  }
   // @ts-ignore
   protected abstract insert: string;
   // @ts-ignore
@@ -14,7 +21,7 @@ export default class BaseDAOStore extends BaseDAORestrictedDefault
 
   protected async generateInsert(): Promise<string> {
     const insert = `INSERT INTO ${this.table} (${this.insert}) VALUES (${this.insertValues})`;
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       resolve(insert);
     });
   }
