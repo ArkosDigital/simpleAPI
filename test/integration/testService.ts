@@ -6,10 +6,6 @@ import {
   Journaly,
 } from '../../source/index';
 export default class TestService extends BaseService {
-  constructor(handler, journaly: Journaly<any>) {
-    super();
-  }
-
   public async selectElementById(id: string): Promise<ServiceModel> {
     return (await this.journaly.publish('TestDAO.selectById', id))[0];
   }
@@ -21,6 +17,7 @@ export default class TestService extends BaseService {
   public async storeElement(
     content: ServiceSimpleModel
   ): Promise<ServiceModel> {
+    console.log('store:' + content);
     return (await this.journaly.publish('TestDAO.store', content))[0];
   }
 
