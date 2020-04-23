@@ -5169,10 +5169,10 @@ ts-jest@25.2.1:
     semver "^5.5"
     yargs-parser "^16.1.0"
 
-ts-mixer@5.2.0-beta.0:
-  version "5.2.0-beta.0"
-  resolved "https://registry.yarnpkg.com/ts-mixer/-/ts-mixer-5.2.0-beta.0.tgz#ea8da678a217c6faf38ba8d3710741dca22e1ff7"
-  integrity sha512-Nbb0F25ugCSBstzzMUn078jKg01RjLtOdUYsbaHP9hxJINPYU5atJDzIqxH1CvxPsT1lOTBdk4UjvRYgQ653eQ==
+ts-mixer@5.2.0-beta.1:
+  version "5.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/ts-mixer/-/ts-mixer-5.2.0-beta.1.tgz#6e7f549db50a162f9d88e1eece3da08e01aae46d"
+  integrity sha512-ip72cMYh5W8iRqjUTadbzczxhsMlBv7lkdFuxfJ2vCEi0pOxTEBwdBnGjUx5G2jaiySWc22nndsNCxgNj9us8g==
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.11.1"

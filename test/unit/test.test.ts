@@ -3,9 +3,11 @@ settings.initFunction = 'init';
 
 abstract class ClassA {
   public name;
+  public test;
 
-  constructor() {
+  constructor(test: string) {
     this.name = this.constructor.name;
+    this.test = test;
   }
   init(): void {
     this.name = this.constructor.name;
@@ -34,6 +36,16 @@ class ClassD extends ClassA {
     super.init();
     this.name3 = this.name + 3;
   }
+
+  printName() {
+    console.log(this.name3);
+    return this.name3;
+  }
+
+  printTest() {
+    console.log(this.test);
+    return this.test;
+  }
 }
 
 class ClassE extends Mixin(ClassB, ClassC) {}
@@ -48,20 +60,21 @@ const assignObject = (
 };
 
 test('test Mixin', async (done) => {
-  const b = new ClassB();
-  const c = new ClassC();
-  const d = new ClassD();
-  const e = new ClassE();
-  const f = new ClassF();
+  const b = new ClassB('BB');
+  const c = new ClassC('CC');
+  const d = new ClassD('DD');
+  const e = new ClassE('EE');
+  const f = new ClassF('FF');
 
-  expect(b).toStrictEqual(assignObject(ClassB, { name: 'ClassB' }));
-  expect(c).toStrictEqual(assignObject(ClassC, { name: 'ClassC' }));
-  expect(d).toStrictEqual(assignObject(ClassD, { name: 'ClassD' }));
+  expect(b).toStrictEqual(assignObject(ClassB, { name: 'ClassB', test: 'BB' }));
+  expect(c).toStrictEqual(assignObject(ClassC, { name: 'ClassC', test: 'CC' }));
+  expect(d).toStrictEqual(assignObject(ClassD, { name: 'ClassD', test: 'DD' }));
   expect(e).toStrictEqual(
     assignObject(ClassE, {
       name: 'ClassE',
       name1: 'ClassE1',
       name2: 'ClassE2',
+      test: 'EE',
     })
   );
   expect(f).toStrictEqual(
@@ -70,8 +83,12 @@ test('test Mixin', async (done) => {
       name1: 'ClassF1', // RECEIVING name1: 'ClassE1'
       name2: 'ClassF2',
       name3: 'ClassF3',
+      test: 'FF',
     })
   );
+
+  f.printName();
+  f.printTest();
 
   done();
 });

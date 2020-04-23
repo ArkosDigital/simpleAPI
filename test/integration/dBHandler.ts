@@ -17,8 +17,8 @@ const postgres = new Pool(database);
 const handler = new Handler(eventDatabase);
 
 class DBHandler extends DatabaseHandler {
-  protected eventHandler = handler;
-  protected readPool = postgres;
+  protected eventHandler;
+  protected readPool;
   protected service: {
     [operation: string]: ServiceAdapter;
   } = {
@@ -34,6 +34,8 @@ class DBHandler extends DatabaseHandler {
   protected constructor() {
     super();
     this.journaly = new Journaly<any>(false);
+    this.eventHandler = handler;
+    this.readPool = postgres;
     this.testDAO = new TestDAO(this.getReadPool(), this.journaly);
     this.testService = new TestService(this.getEventHandler(), this.journaly);
   }
