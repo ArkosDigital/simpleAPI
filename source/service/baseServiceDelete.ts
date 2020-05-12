@@ -10,12 +10,19 @@ export default class BaseServiceDelete extends BaseServiceDefault
   implements ServiceDeleteAdapter {
   protected init(handler, journaly: Journaly<any>): void {
     super.init(handler, journaly);
-    console.log('delete:', this.element);
-    // this.journaly.subscribe(this.element + '.' + 'delete', this.delete);
-    // this.journaly.subscribe(
-    //   this.element + '.' + 'deleteElement',
-    //   this.deleteElement
-    // );
+    if (this) {
+      if (this.delete) {
+        const boundedStore = this.delete.bind(this);
+        this.journaly.subscribe(this.element + '.' + 'delete', boundedStore);
+      }
+      if (this.deleteElement) {
+        const boundedStoreElement = this.deleteElement.bind(this);
+        this.journaly.subscribe(
+          this.element + '.' + 'deleteElement',
+          boundedStoreElement
+        );
+      }
+    }
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore

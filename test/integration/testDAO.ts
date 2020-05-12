@@ -11,10 +11,6 @@ export default class TestDAO extends BaseDAO {
 
   protected updateQuery = '';
 
-  constructor(pool, journaly: Journaly<any>) {
-    super();
-  }
-
   protected generateVectorValues(
     content: DAOSimpleModel
   ): Promise<Array<unknown>> {

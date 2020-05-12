@@ -9,7 +9,10 @@ export default class BaseDAODelete extends BaseDAODefault
   implements DAODeleteAdapter {
   protected init(pool, journaly: Journaly<any>): void {
     super.init(pool, journaly);
-    // this.journaly.subscribe(this.element + '.' + 'delete', this.delete);
+    if (this && this.delete) {
+      const boundedStore = this.delete.bind(this);
+      this.journaly.subscribe(this.element + '.' + 'delete', boundedStore);
+    }
   }
   public delete(id: string): Promise<boolean> {
     console.log(this.table);

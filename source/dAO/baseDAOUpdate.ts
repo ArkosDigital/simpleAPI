@@ -11,7 +11,10 @@ export default class BaseDAOUpdate extends BaseDAORestrictedDefault
   implements DAOUpdateAdapter {
   protected init(pool, journaly: Journaly<any>): void {
     super.init(pool, journaly);
-    // this.journaly.subscribe(this.element + '.' + 'update', this.update);
+    if (this && this.update) {
+      const boundedStore = this.update.bind(this);
+      this.journaly.subscribe(this.element + '.' + 'update', boundedStore);
+    }
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
