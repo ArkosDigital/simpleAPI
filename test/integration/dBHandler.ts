@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import database from './database';
 import { Handler } from 'flexiblepersistence';
@@ -36,7 +37,9 @@ class DBHandler extends DatabaseHandler {
     this.journaly = new Journaly<any>(false);
     this.eventHandler = handler;
     this.readPool = postgres;
+    // @ts-ignore
     this.testDAO = new TestDAO(this.getReadPool(), this.journaly);
+    // @ts-ignore
     this.testService = new TestService(this.getEventHandler(), this.journaly);
   }
   protected testDAO: TestDAO;
