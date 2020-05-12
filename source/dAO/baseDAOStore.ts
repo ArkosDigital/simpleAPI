@@ -11,7 +11,10 @@ export default class BaseDAOStore extends BaseDAORestrictedDefault
   implements DAOStoreAdapter {
   protected init(pool, journaly: Journaly<any>): void {
     super.init(pool, journaly);
-    // this.journaly.subscribe(this.element + '.' + 'store', this.store);
+    if (this && this.store) {
+      const boundedStore = this.store.bind(this);
+      this.journaly.subscribe(this.element + '.' + 'store', boundedStore);
+    }
   }
   // @ts-ignore
   protected abstract insert: string;

@@ -17,12 +17,18 @@ export default class BaseServiceSelectAll extends BaseServiceDefault
 
   protected init(handler, journaly: Journaly<any>): void {
     super.init(handler, journaly);
-    console.log('store:', this.element);
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    // this.journaly.subscribe(this.element + '.' + 'selectAll', this.selectAll);
-    // this.journaly.subscribe(
-    //   this.element + '.' + 'selectAllElements',
-    //   this.selectAllElements
-    // );
+    if (this) {
+      if (this.selectAll) {
+        const boundedStore = this.selectAll.bind(this);
+        this.journaly.subscribe(this.element + '.' + 'selectAll', boundedStore);
+      }
+      if (this.selectAllElements) {
+        const boundedStoreElement = this.selectAllElements.bind(this);
+        this.journaly.subscribe(
+          this.element + '.' + 'selectAllElements',
+          boundedStoreElement
+        );
+      }
+    }
   }
 }

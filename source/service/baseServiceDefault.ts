@@ -16,10 +16,12 @@ export default class BaseServiceDefault {
   // @ts-ignore
   protected handler: Handler;
 
-  public constructor(handler: Handler, journaly: Journaly<any>) {
+  protected constructor(handler: Handler, journaly: Journaly<any>) {
+    this.element = this.constructor.name;
     this.handler = handler;
     this.journaly = journaly;
   }
+
   protected init(handler: Handler, journaly: Journaly<any>): void {
     this.element = this.constructor.name;
     this.handler = handler;

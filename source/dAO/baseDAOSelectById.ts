@@ -11,7 +11,10 @@ export default class BaseDAOSelectById extends BaseDAODefault
   implements DAOSelectByIdAdapter {
   protected init(pool, journaly: Journaly<any>): void {
     super.init(pool, journaly);
-    // this.journaly.subscribe(this.element + '.' + 'selectById', this.selectById);
+    if (this && this.selectById) {
+      const boundedStore = this.selectById.bind(this);
+      this.journaly.subscribe(this.element + '.' + 'selectById', boundedStore);
+    }
   }
   public async selectById(id: string): Promise<DAOModel> {
     const select = await this.generateSelect(this.table);
