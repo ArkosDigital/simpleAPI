@@ -6,14 +6,13 @@ test('store person, update, select all, select by id person and delete it', asyn
     // Inicializa o banco de dados
     await Utils.init(dBHandler.getReadPool());
     const createdPerson = (
-      await dBHandler.getJournaly().publish('TestService.store')
+      await dBHandler.getJournaly().publish('TestService.store', {})
     )[0];
     console.log(createdPerson);
     const expectedPerson = {
       id: createdPerson.id,
     };
     expect(createdPerson).toStrictEqual(expectedPerson);
-    await dBHandler.getJournaly().publish('TestService.store');
     const all = (
       await dBHandler.getJournaly().publish('TestService.selectAll')
     )[0];

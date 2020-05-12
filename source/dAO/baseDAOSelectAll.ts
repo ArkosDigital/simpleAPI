@@ -13,7 +13,10 @@ export default class BaseDAOSelectAll extends BaseDAODefault
   implements DAOSelectAllAdapter {
   protected init(pool, journaly: Journaly<any>): void {
     super.init(pool, journaly);
-    // this.journaly.subscribe(this.element + '.' + 'selectAll', this.selectAll);
+    if (this && this.selectAll) {
+      const boundedStore = this.selectAll.bind(this);
+      this.journaly.subscribe(this.element + '.' + 'selectAll', boundedStore);
+    }
   }
   public async selectAll(): Promise<Array<DAOModel>> {
     const select = await this.generateSelect(this.table);

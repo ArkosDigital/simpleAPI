@@ -24,7 +24,7 @@
     "express": "4.17.1",
     "journaly": "0.1.3",
     "flexiblepersistence": "1.0.57",
-    "ts-mixer": "5.2.0-beta.1",
+    "ts-mixer": "5.2.1",
     "pg": "8.0.0"
   },
   "devDependencies": {

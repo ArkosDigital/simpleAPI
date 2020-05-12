@@ -11,14 +11,22 @@ export default class BaseServiceSelectById extends BaseServiceDefault
   implements ServiceSelectByIdAdapter {
   protected init(handler: Handler, journaly: Journaly<any>): void {
     super.init(handler, journaly);
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    // const _self = this;
-    console.log('init:', this.element);
-    // this.journaly.subscribe(this.element + '.' + 'store', _self.selectById);
-    // this.journaly.subscribe(
-    //   this.element + '.' + 'storeElement',
-    //   _self.selectElementById
-    // );
+    if (this) {
+      if (this.selectById) {
+        const boundedStore = this.selectById.bind(this);
+        this.journaly.subscribe(
+          this.element + '.' + 'selectById',
+          boundedStore
+        );
+      }
+      if (this.selectElementById) {
+        const boundedStoreElement = this.selectElementById.bind(this);
+        this.journaly.subscribe(
+          this.element + '.' + 'selectElementById',
+          boundedStoreElement
+        );
+      }
+    }
   }
   // @ts-ignore
   protected abstract async selectElementById(id: string): Promise<ServiceModel>;
