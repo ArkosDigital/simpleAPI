@@ -5,5 +5,5 @@ import BaseServiceRestricted from './baseServiceRestricted';
 import BaseServiceReserved from './baseServiceReserved';
 // @ts-ignore
 export default abstract class BaseService
-  extends Mixin(BaseServiceRestricted, BaseServiceReserved)
+  extends Mixin(BaseServiceReserved, BaseServiceRestricted)
   implements ServiceAdapter {}
