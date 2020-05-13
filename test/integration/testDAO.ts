@@ -1,4 +1,4 @@
-import { BaseDAO, DAOSimpleModel, Journaly } from '../../source/index';
+import { BaseDAO, DAOSimpleModel } from '../../source/index';
 /* eslint-disable no-unused-vars */
 export default class TestDAO extends BaseDAO {
   protected table = 'tests';
