@@ -3,7 +3,6 @@ import {
   BaseService,
   ServiceModel,
   ServiceSimpleModel,
-  Journaly,
 } from '../../source/index';
 export default class TestService extends BaseService {
   public async selectElementById(id: string): Promise<ServiceModel> {
