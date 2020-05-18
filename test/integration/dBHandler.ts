@@ -12,14 +12,17 @@ const postgres = new Pool(database);
 const handler = new Handler(eventDatabase);
 
 class DBHandler extends DatabaseHandler {
-  protected constructor() {
-    super(false);
-    this.eventHandler = handler;
-    this.readPool = postgres;
+  protected initDAO(): void {
     // @ts-ignore
-    this.dAO[test] = new TestDAO(this.getReadPool(), this.journaly);
-    // @ts-ignore
-    this.service[test] = new TestService(this.getEventHandler(), this.journaly);
+    this.dAO['test'] = new TestDAO(this.getReadPool(), this.journaly);
+  }
+  protected initService(): void {
+    this.service['test'] = new TestService(
+      // @ts-ignore
+      this.getEventHandler(),
+      // @ts-ignore
+      this.journaly
+    );
   }
 
   public async migrate(): Promise<boolean> {
@@ -59,4 +62,8 @@ class DBHandler extends DatabaseHandler {
   }
 }
 
-export default DBHandler.getInstance() as DBHandler;
+export default DBHandler.getInstance({
+  eventHandler: handler,
+  readPool: postgres,
+  hasMemory: false,
+}) as DBHandler;

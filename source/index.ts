@@ -56,10 +56,12 @@ import ServiceSimpleModel from './model/serviceSimpleModel';
 import RouterSingleton from './router/routerSingleton';
 
 import { Pool } from 'pg';
+import DatabaseInitializer from './database/databaseInitializer';
 
 export {
   SimpleApp,
   DatabaseHandler,
+  DatabaseInitializer,
   ServiceAdapter,
   Utils,
   Journaly,
