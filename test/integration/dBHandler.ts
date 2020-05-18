@@ -3,13 +3,7 @@
 import database from './database';
 import { Handler } from 'flexiblepersistence';
 import eventDatabase from './eventDatabase';
-import {
-  DatabaseHandler,
-  Utils,
-  Pool,
-  ServiceAdapter,
-  Journaly,
-} from '../../source/index';
+import { DatabaseHandler, Utils, Pool } from '../../source/index';
 import TestService from './testService';
 import TestDAO from './testDAO';
 
@@ -18,37 +12,14 @@ const postgres = new Pool(database);
 const handler = new Handler(eventDatabase);
 
 class DBHandler extends DatabaseHandler {
-  protected eventHandler;
-  protected readPool;
-  protected service: {
-    [operation: string]: ServiceAdapter;
-  } = {
-    // example: exampleService,
-  };
-
-  protected journaly: Journaly<any>;
-
-  public getJournaly(): Journaly<any> {
-    return this.journaly;
-  }
-
   protected constructor() {
-    super();
-    this.journaly = new Journaly<any>(false);
+    super(false);
     this.eventHandler = handler;
     this.readPool = postgres;
     // @ts-ignore
-    this.testDAO = new TestDAO(this.getReadPool(), this.journaly);
+    this.dAO[test] = new TestDAO(this.getReadPool(), this.journaly);
     // @ts-ignore
-    this.testService = new TestService(this.getEventHandler(), this.journaly);
-  }
-  protected testDAO: TestDAO;
-  public getTestDAO(): TestDAO {
-    return this.testDAO;
-  }
-  protected testService: TestService;
-  public getTestService(): TestService {
-    return this.testService;
+    this.service[test] = new TestService(this.getEventHandler(), this.journaly);
   }
 
   public async migrate(): Promise<boolean> {

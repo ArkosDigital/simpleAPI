@@ -2,18 +2,34 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Handler } from 'flexiblepersistence';
 import ServiceAdapter from '../adapter/service/serviceAdapter';
+import DAOAdapter from '../adapter/dAO/dAOAdapter';
+import { Journaly } from 'journaly';
 // @ts-ignore
 export default class DatabaseHandler {
   // @ts-ignore
+  protected journaly: Journaly<any>;
+
+  public getJournaly(): Journaly<any> {
+    return this.journaly;
+  }
+  // @ts-ignore
   public abstract async migrate(): Promise<boolean>;
   // @ts-ignore
-  protected abstract service: {
-    [operation: string]: ServiceAdapter;
+  public service: {
+    [name: string]: ServiceAdapter;
+  } = {
+    // test: exampleService,
+  };
+
+  public dAO: {
+    [name: string]: DAOAdapter;
+  } = {
+    // test: exampleDAO
   };
   // @ts-ignore
-  protected abstract eventHandler: Handler;
+  protected eventHandler: Handler;
   // @ts-ignore
-  protected abstract readPool: any;
+  protected readPool: any;
 
   protected operation: {
     [operation: number]: string;
@@ -26,6 +42,10 @@ export default class DatabaseHandler {
   };
 
   protected static _instance: DatabaseHandler;
+
+  protected constructor(hasMemory?: boolean) {
+    this.journaly = new Journaly<any>(hasMemory);
+  }
 
   public getEventHandler(): Handler {
     return this.eventHandler;
