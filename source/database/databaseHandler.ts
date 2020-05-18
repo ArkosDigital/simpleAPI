@@ -4,17 +4,17 @@ import { Handler } from 'flexiblepersistence';
 import ServiceAdapter from '../adapter/service/serviceAdapter';
 import DAOAdapter from '../adapter/dAO/dAOAdapter';
 import { Journaly } from 'journaly';
+import DatabaseInitializer from './databaseInitializer';
 // @ts-ignore
-export default class DatabaseHandler {
+export default abstract class DatabaseHandler {
   // @ts-ignore
   protected journaly: Journaly<any>;
 
   public getJournaly(): Journaly<any> {
     return this.journaly;
   }
-  // @ts-ignore
   public abstract async migrate(): Promise<boolean>;
-  // @ts-ignore
+
   public service: {
     [name: string]: ServiceAdapter;
   } = {
@@ -43,9 +43,17 @@ export default class DatabaseHandler {
 
   protected static _instance: DatabaseHandler;
 
-  protected constructor(hasMemory?: boolean) {
-    this.journaly = new Journaly<any>(hasMemory);
+  protected constructor(init?: DatabaseInitializer) {
+    if (init) {
+      this.journaly = new Journaly<any>(init.hasMemory);
+      if (init.eventHandler) this.eventHandler = init.eventHandler;
+      if (init.readPool) this.readPool = init.readPool;
+      this.initDAO();
+      this.initService();
+    }
   }
+  protected abstract initDAO(): void;
+  protected abstract initService(): void;
 
   public getEventHandler(): Handler {
     return this.eventHandler;
@@ -55,9 +63,10 @@ export default class DatabaseHandler {
     return this.readPool;
   }
 
-  public static getInstance(): DatabaseHandler {
+  public static getInstance(init?: DatabaseInitializer): DatabaseHandler {
     if (!this._instance) {
-      this._instance = new this();
+      // @ts-ignore
+      this._instance = new this(init);
     }
     return this._instance;
   }
