@@ -1,6 +1,6 @@
 {
   "name": "simple-api-ts",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "main": "dist/source/index.js",
   "module": "dist/source/index.js",
   "types": "dist/source/index.d.ts",
