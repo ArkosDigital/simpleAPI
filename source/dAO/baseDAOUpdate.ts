@@ -2,20 +2,10 @@ import DAOModel from '../model/dAOModel';
 import DAOSimpleModel from '../model/dAOSimpleModel';
 import DAOUpdateAdapter from '../adapter/dAO/dAOUpdateAdapter';
 import BaseDAORestrictedDefault from './baseDAORestrictedDefault';
-import { Journaly } from 'journaly';
-import { settings } from 'ts-mixer';
-settings.initFunction = 'init';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class BaseDAOUpdate extends BaseDAORestrictedDefault
   implements DAOUpdateAdapter {
-  protected init(pool, journaly: Journaly<any>): void {
-    super.init(pool, journaly);
-    if (this && this.update) {
-      const boundedStore = this.update.bind(this);
-      this.journaly.subscribe(this.element + '.' + 'update', boundedStore);
-    }
-  }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   protected abstract updateQuery: string;

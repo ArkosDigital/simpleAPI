@@ -18,7 +18,7 @@ export default class TestService extends BaseService {
   public async storeElement(
     content: ServiceSimpleModel
   ): Promise<ServiceModel> {
-    console.log('store:' + content);
+    // console.log('store:' + content);
     // @ts-ignore
     return (await this.journaly.publish('TestDAO.store', content))[0];
   }

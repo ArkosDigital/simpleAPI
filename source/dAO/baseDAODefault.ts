@@ -1,32 +1,29 @@
 import BigNumber from 'bignumber.js';
-import { Journaly } from 'journaly';
 import { settings } from 'ts-mixer';
+import Default from '../default/default';
+import BaseDAODefaultInitializer from './baseDAODefaultInitializer';
 settings.initFunction = 'init';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export default class BaseDAODefault {
+export default class BaseDAODefault extends Default {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   protected table: string;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  protected element: string;
 
-  protected constructor(pool, journaly: Journaly<any>) {
-    this.pool = pool;
+  protected baseClass = 'BaseDAO';
 
-    this.journaly = journaly;
-    this.table = this.constructor.name; //TODO: modify to DB structure
-    this.element = this.constructor.name;
+  protected constructor(initDefault: BaseDAODefaultInitializer) {
+    super(initDefault);
+    this.pool = initDefault.pool;
   }
-  protected init(pool, journaly: Journaly<any>): void {
-    this.pool = pool;
+  protected init(initDefault: BaseDAODefaultInitializer): void {
+    super.init(initDefault);
+    this.pool = initDefault.pool;
 
-    this.journaly = journaly;
-    this.table = this.constructor.name; //TODO: modify to DB structure
-    this.element = this.constructor.name;
+    if (!this.table || !this.constructor.name.includes(this.baseClass)) {
+      this.table = this.constructor.name; //TODO: modify to DB structure
+    }
   }
 
-  protected journaly;
   protected pool;
 
   protected groupBy = '';
