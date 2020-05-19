@@ -3,19 +3,9 @@ import DAOModel from '../model/dAOModel';
 import DAOSimpleModel from '../model/dAOSimpleModel';
 import DAOStoreAdapter from '../adapter/dAO/dAOStoreAdapter';
 import BaseDAORestrictedDefault from './baseDAORestrictedDefault';
-import { Journaly } from 'journaly';
-import { settings } from 'ts-mixer';
-settings.initFunction = 'init';
 // @ts-ignore
 export default class BaseDAOStore extends BaseDAORestrictedDefault
   implements DAOStoreAdapter {
-  protected init(pool, journaly: Journaly<any>): void {
-    super.init(pool, journaly);
-    if (this && this.store) {
-      const boundedStore = this.store.bind(this);
-      this.journaly.subscribe(this.element + '.' + 'store', boundedStore);
-    }
-  }
   // @ts-ignore
   protected abstract insert: string;
   // @ts-ignore

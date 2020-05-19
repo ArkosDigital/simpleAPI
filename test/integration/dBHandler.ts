@@ -14,15 +14,17 @@ const handler = new Handler(eventDatabase);
 class DBHandler extends DatabaseHandler {
   protected initDAO(): void {
     // @ts-ignore
-    this.dAO['test'] = new TestDAO(this.getReadPool(), this.journaly);
+    this.dAO['test'] = new TestDAO({
+      pool: this.getReadPool(),
+      journaly: this.journaly,
+    });
   }
   protected initService(): void {
-    this.service['test'] = new TestService(
-      // @ts-ignore
-      this.getEventHandler(),
-      // @ts-ignore
-      this.journaly
-    );
+    // @ts-ignore
+    this.service['test'] = new TestService({
+      handler: this.getEventHandler(),
+      journaly: this.journaly,
+    });
   }
 
   public async migrate(): Promise<boolean> {

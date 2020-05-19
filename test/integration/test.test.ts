@@ -8,7 +8,7 @@ test('store person, update, select all, select by id person and delete it', asyn
     const createdPerson = (
       await dBHandler.getJournaly().publish('TestService.store', {})
     )[0];
-    console.log(createdPerson);
+    // console.log(createdPerson);
     const expectedPerson = {
       id: createdPerson.id,
     };

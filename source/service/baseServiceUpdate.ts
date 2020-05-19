@@ -3,29 +3,10 @@ import BaseServiceDefault from './baseServiceDefault';
 import ServiceSimpleModel from '../model/serviceSimpleModel';
 import ServiceModel from '../model/serviceModel';
 import { Event, Operation } from 'flexiblepersistence';
-import { settings } from 'ts-mixer';
-import { Journaly } from 'journaly';
-settings.initFunction = 'init';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 export default class BaseServiceUpdate extends BaseServiceDefault
   implements ServiceUpdateAdapter {
-  protected init(handler, journaly: Journaly<any>): void {
-    super.init(handler, journaly);
-    if (this) {
-      if (this.update) {
-        const boundedStore = this.update.bind(this);
-        this.journaly.subscribe(this.element + '.' + 'update', boundedStore);
-      }
-      if (this.updateElement) {
-        const boundedStoreElement = this.updateElement.bind(this);
-        this.journaly.subscribe(
-          this.element + '.' + 'updateElement',
-          boundedStoreElement
-        );
-      }
-    }
-  }
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   protected abstract async updateElement(

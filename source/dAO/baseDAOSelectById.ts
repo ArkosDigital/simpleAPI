@@ -1,21 +1,8 @@
 import DAOModel from '../model/dAOModel';
 import DAOSelectByIdAdapter from '../adapter/dAO/dAOSelectByIdAdapter';
 import BaseDAODefault from './baseDAODefault';
-import { Journaly } from 'journaly';
-import { settings } from 'ts-mixer';
-settings.initFunction = 'init';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 export default class BaseDAOSelectById extends BaseDAODefault
   implements DAOSelectByIdAdapter {
-  protected init(pool, journaly: Journaly<any>): void {
-    super.init(pool, journaly);
-    if (this && this.selectById) {
-      const boundedStore = this.selectById.bind(this);
-      this.journaly.subscribe(this.element + '.' + 'selectById', boundedStore);
-    }
-  }
   public async selectById(id: string): Promise<DAOModel> {
     const select = await this.generateSelect(this.table);
     return new Promise((resolve, reject) => {
