@@ -7,7 +7,7 @@ import {
 export default class TestService extends BaseService {
   public async selectElementById(id: string): Promise<ServiceModel> {
     // @ts-ignore
-    return (await this.journaly.publish('TestDAO.selectById', id))[0];
+    return (await this.dAO('selectById', id))[0];
   }
 
   public async selectAllElements(): Promise<Array<ServiceModel>> {

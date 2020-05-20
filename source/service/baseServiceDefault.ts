@@ -10,6 +10,14 @@ export default class BaseServiceDefault extends Default {
   protected handler: Handler;
   protected baseClass = 'BaseService';
 
+  protected nameDAO: string | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected async dAO(method: string, ...args: any): Promise<any[]> {
+    if (!this.nameDAO) this.nameDAO = this.element.replace('Service', 'DAO');
+    return this.journaly.publish(this.nameDAO + '.' + method, ...args);
+  }
+
   protected constructor(initDefault: BaseServiceDefaultInitializer) {
     super(initDefault);
     this.handler = initDefault.handler;
