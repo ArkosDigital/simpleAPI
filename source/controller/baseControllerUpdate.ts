@@ -7,11 +7,12 @@ import ControllerUpdateAdapter from '../adapter/controller/controllerUpdateAdapt
 // @ts-ignore
 export default class BaseControllerUpdate extends BaseControllerDefault
   implements ControllerUpdateAdapter {
-  // @ts-ignore
-  protected abstract updateElement(
+  protected async updateElement(
     id: string,
     content: ServiceSimpleModel
-  ): Promise<ServiceModel>;
+  ): Promise<ServiceModel> {
+    return (await this.service('update', id, content))[0];
+  }
 
   public async update(req: Request, res: Response): Promise<Response> {
     try {

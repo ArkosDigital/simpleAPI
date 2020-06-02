@@ -5,8 +5,9 @@ import ControllerDeleteAdapter from '../adapter/controller/controllerDeleteAdapt
 // @ts-ignore
 export default class BaseControllerDelete extends BaseControllerDefault
   implements ControllerDeleteAdapter {
-  // @ts-ignore
-  protected abstract deleteElement(content: string): Promise<boolean>;
+  protected async deleteElement(id: string): Promise<boolean> {
+    return (await this.service('delete', id))[0];
+  }
 
   public async delete(req: Request, res: Response): Promise<Response> {
     try {

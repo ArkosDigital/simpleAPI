@@ -6,8 +6,9 @@ import BaseControllerDefault from './baseControllerDefault';
 // @ts-ignore
 export default class BaseControllerIndex extends BaseControllerDefault
   implements ControllerIndexAdapter {
-  // @ts-ignore
-  protected abstract selectById(id: string): Promise<ServiceModel>;
+  protected async selectById(id: string): Promise<ServiceModel> {
+    return (await this.service('selectById', id))[0];
+  }
 
   public async index(req: Request, res: Response): Promise<Response> {
     try {
