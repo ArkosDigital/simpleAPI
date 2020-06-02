@@ -8,9 +8,11 @@ import ControllerStoreAdapter from '../adapter/controller/controllerStoreAdapter
 export default class BaseControllerStore extends BaseControllerDefault
   implements ControllerStoreAdapter {
   // @ts-ignore
-  protected abstract storeElement(
+  protected async storeElement(
     content: ServiceSimpleModel
-  ): Promise<ServiceModel>;
+  ): Promise<ServiceModel> {
+    return (await this.service('store', content))[0];
+  }
 
   public async store(req: Request, res: Response): Promise<Response> {
     try {

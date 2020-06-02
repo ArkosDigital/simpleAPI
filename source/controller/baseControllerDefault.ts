@@ -13,7 +13,8 @@ export default class BaseControllerDefault extends Default {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async service(method: string, ...args: any): Promise<any[]> {
-    if (!this.nameService) this.nameService = this.element.replace('Controller', 'Service');
+    if (!this.nameService)
+      this.nameService = this.element.replace('Controller', 'Service');
     return this.journaly.publish(this.nameService + '.' + method, ...args);
   }
 }

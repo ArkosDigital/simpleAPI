@@ -6,8 +6,9 @@ import BaseControllerDefault from './baseControllerDefault';
 // @ts-ignore
 export default class BaseControllerShow extends BaseControllerDefault
   implements ControllerShowAdapter {
-  // @ts-ignore
-  protected abstract selectAll(filter?: unknown): Promise<Array<ServiceModel>>;
+  protected async selectAll(filter?: unknown): Promise<Array<ServiceModel>> {
+    return (await this.service('selectAll', filter))[0];
+  }
 
   public async show(req: Request, res: Response): Promise<Response> {
     try {
