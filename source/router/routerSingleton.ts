@@ -4,7 +4,7 @@ import { Router } from 'express';
 export default class RouterSingleton {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
-  public abstract createRoutes(): void;
+  public abstract createRoutes(journaly): void;
   protected static _instance: RouterSingleton;
 
   protected routes: Router;
