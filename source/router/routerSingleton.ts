@@ -1,10 +1,11 @@
 import { Router } from 'express';
+import { Journaly } from 'journaly';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 export default class RouterSingleton {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
-  public abstract createRoutes(journaly): void;
+  public abstract createRoutes(journaly: Journaly<any>): void;
   protected static _instance: RouterSingleton;
 
   protected routes: Router;
