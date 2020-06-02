@@ -12,7 +12,7 @@ export default class Default {
 
   protected baseClass = 'Default';
 
-  protected constructor(initDefault: DefaultInitializer) {
+  public constructor(initDefault: DefaultInitializer) {
     this.journaly = initDefault.journaly;
   }
   protected init(initDefault: DefaultInitializer): void {
