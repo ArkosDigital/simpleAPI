@@ -6,5 +6,6 @@ import BaseControllerUpdate from './baseControllerUpdate';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 export default class BaseControllerReserved
+  // @ts-ignore
   extends Mixin(BaseControllerStore, BaseControllerDelete, BaseControllerUpdate)
   implements ControllerReservedAdapter {}
