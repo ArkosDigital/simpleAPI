@@ -17,7 +17,7 @@ export default class BaseDAODelete extends BaseDAODefault
           if (result.rowCount) {
             return resolve(true);
           }
-          console.log(result);
+          // console.log(result);
 
           error = new Error();
           error.name = 'RemoveError';

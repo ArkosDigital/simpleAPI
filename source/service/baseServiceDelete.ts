@@ -17,8 +17,6 @@ export default class BaseServiceDelete extends BaseServiceDefault
         selection: { _id: id },
       })
     );
-    console.log('delete');
-
     const result = await this.deleteElement(id);
     return result;
   }
