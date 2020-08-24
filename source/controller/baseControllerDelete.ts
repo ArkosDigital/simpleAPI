@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import BaseControllerDefault from './baseControllerDefault';
-import ControllerDeleteAdapter from '../adapter/controller/controllerDeleteAdapter';
+import ControllerDeleteAdapter from '../adapter/controllerDeleteAdapter';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 export default class BaseControllerDelete extends BaseControllerDefault

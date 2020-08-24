@@ -22,46 +22,45 @@ class DBHandler extends DatabaseHandler {
   protected initService(): void {
     // @ts-ignore
     this.service['test'] = new TestService({
-      handler: this.getEventHandler(),
       journaly: this.journaly,
     });
   }
 
-  public async migrate(): Promise<boolean> {
-    try {
-      const events = await this.eventHandler.readArray('events', {});
-      await Utils.dropTables(this.getReadPool());
-      await Utils.init(this.getReadPool());
-      for (const event of events.receivedItem) {
-        if (this.service[event.name] && this.operation[event.operation]) {
-          const service = this.service[event.name];
-          const operation = this.operation[event.operation];
-          if (
-            event.content &&
-            event._id &&
-            (!event.selection || (event.selection && !event.selection._id))
-          ) {
-            event.content.id = event._id.toString();
-          }
-          if (event.selection && event.selection._id && event.content) {
-            await service[operation](event.selection._id, event.content);
-          } else if (event.content) {
-            await service[operation](event.content);
-          } else if (event.selection && event.selection._id) {
-            await service[operation](event.selection._id);
-          }
-        }
-      }
-      const all = await this.journaly.publish('TestService.selectAll')[0];
-      if (!all || all.length < 1) {
-        await this.journaly.publish('TestService.store', {});
-      }
-    } catch (error) {
-      return new Promise((resolve, reject) => reject(error));
-    }
+  // public async migrate(): Promise<boolean> {
+  //   try {
+  //     const events = await this.eventHandler.readArray('events', {});
+  //     await Utils.dropTables(this.getReadPool());
+  //     await Utils.init(this.getReadPool());
+  //     for (const event of events.receivedItem) {
+  //       if (this.service[event.name] && this.operation[event.operation]) {
+  //         const service = this.service[event.name];
+  //         const operation = this.operation[event.operation];
+  //         if (
+  //           event.content &&
+  //           event._id &&
+  //           (!event.selection || (event.selection && !event.selection._id))
+  //         ) {
+  //           event.content.id = event._id.toString();
+  //         }
+  //         if (event.selection && event.selection._id && event.content) {
+  //           await service[operation](event.selection._id, event.content);
+  //         } else if (event.content) {
+  //           await service[operation](event.content);
+  //         } else if (event.selection && event.selection._id) {
+  //           await service[operation](event.selection._id);
+  //         }
+  //       }
+  //     }
+  //     const all = await this.journaly.publish('TestService.selectAll')[0];
+  //     if (!all || all.length < 1) {
+  //       await this.journaly.publish('TestService.store', {});
+  //     }
+  //   } catch (error) {
+  //     return new Promise((resolve, reject) => reject(error));
+  //   }
 
-    return new Promise((resolve) => resolve(true));
-  }
+  //   return new Promise((resolve) => resolve(true));
+  // }
 }
 
 export default DBHandler.getInstance({

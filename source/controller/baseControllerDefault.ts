@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-import Default from '../default/default';
+import { Default } from 'default-initializer';
 import { settings } from 'ts-mixer';
 settings.initFunction = 'init';
 export default class BaseControllerDefault extends Default {
@@ -13,8 +13,10 @@ export default class BaseControllerDefault extends Default {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async service(method: string, ...args: any): Promise<any[]> {
-    if (!this.nameService)
+    if (!this.nameService && this.element)
       this.nameService = this.element.replace('Controller', 'Service');
+    if (!this.journaly)
+      return new Promise((resolve, reject) => { reject(new Error('No journaly connected!')) });
     return this.journaly.publish(this.nameService + '.' + method, ...args);
   }
 }

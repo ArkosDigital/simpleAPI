@@ -7,6 +7,6 @@ const app = new App(
   databaseHandler.getInstance().getJournaly()
 ).express;
 
-databaseHandler.getInstance().migrate();
+// databaseHandler.getInstance().migrate();
 
 app.listen(process.env.PORT || 3333);

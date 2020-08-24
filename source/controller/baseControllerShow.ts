@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import ServiceModel from '../model/serviceModel';
-import ControllerShowAdapter from '../adapter/controller/controllerShowAdapter';
+import { ServiceModel } from '@flexiblepersistence/service';
+import ControllerShowAdapter from '../adapter/controllerShowAdapter';
 import BaseControllerDefault from './baseControllerDefault';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore

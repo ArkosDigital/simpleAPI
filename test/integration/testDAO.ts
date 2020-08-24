@@ -1,4 +1,4 @@
-import { BaseDAO, DAOSimpleModel } from '../../source/index';
+import { BaseDAO, DAOSimpleModel } from '@flexiblepersistence/postgres';
 /* eslint-disable no-unused-vars */
 export default class TestDAO extends BaseDAO {
   protected table = 'tests';
@@ -11,12 +11,19 @@ export default class TestDAO extends BaseDAO {
 
   protected updateQuery = '';
 
+  constructor(initDefault) {
+    super(initDefault);
+    // console.log(this);
+  }
+
   protected generateVectorValues(
     content: DAOSimpleModel
   ): Promise<Array<unknown>> {
     let values;
-    if (content.id) values = [content.id];
+    console.log('WTF');
+    if (content && content.id) values = [content.id];
     else values = [];
+    console.log('values:', values);
     return new Promise((resolve) => resolve(values));
   }
 }

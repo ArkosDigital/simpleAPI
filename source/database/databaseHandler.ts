@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Handler } from 'flexiblepersistence';
-import ServiceAdapter from '../adapter/service/serviceAdapter';
-import DAOAdapter from '../adapter/dAO/dAOAdapter';
 import { Journaly } from 'journaly';
-import DatabaseInitializer from './databaseInitializer';
+import { DatabaseInitializer, DAOAdapter } from '@flexiblepersistence/postgres';
+import { PersistenceAdapter } from 'flexiblepersistence';
 // @ts-ignore
 export default abstract class DatabaseHandler {
   // @ts-ignore
@@ -13,19 +12,17 @@ export default abstract class DatabaseHandler {
   public getJournaly(): Journaly<any> {
     return this.journaly;
   }
-  public abstract async migrate(): Promise<boolean>;
-
   public service: {
-    [name: string]: ServiceAdapter;
+    [name: string]: PersistenceAdapter;
   } = {
-    // test: exampleService,
-  };
+      // test: exampleService,
+    };
 
   public dAO: {
     [name: string]: DAOAdapter;
   } = {
-    // test: exampleDAO
-  };
+      // test: exampleDAO
+    };
   // @ts-ignore
   protected eventHandler: Handler;
   // @ts-ignore
@@ -34,12 +31,12 @@ export default abstract class DatabaseHandler {
   protected operation: {
     [operation: number]: string;
   } = {
-    0: 'storeElement',
-    2: 'updateElement',
-    3: 'updateElement',
-    4: 'deleteElement',
-    5: 'deleteElement',
-  };
+      0: 'storeElement',
+      2: 'updateElement',
+      3: 'updateElement',
+      4: 'deleteElement',
+      5: 'deleteElement',
+    };
 
   protected static _instance: DatabaseHandler;
 

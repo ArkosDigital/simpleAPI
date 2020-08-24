@@ -1,61 +1,111 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import {
-  BaseService,
   ServiceModel,
   ServiceSimpleModel,
-} from '../../source/index';
-export default class TestService extends BaseService {
-  public async selectElementById(id: string): Promise<ServiceModel> {
-    // @ts-ignore
-    return (await this.dAO('selectById', id))[0];
+  BaseServiceDefault
+} from '@flexiblepersistence/service'
+import { PersistenceAdapter, PersistenceInputCreate, PersistencePromise, PersistenceInputDelete, PersistenceInputUpdate, PersistenceInputRead } from 'flexiblepersistence'
+export default class TestService extends BaseServiceDefault
+  implements PersistenceAdapter {
+  close(): Promise<unknown> {
+    throw new Error('Method not implemented.');
   }
-
-  public async selectAllElements(): Promise<Array<ServiceModel>> {
-    // @ts-ignore
-    return (await this.journaly.publish('TestDAO.selectAll'))[0];
+  getDatabaseInfo() {
+    throw new Error('Method not implemented.');
   }
+  create(input: PersistenceInputCreate | {}): Promise<PersistencePromise> {
+    return new Promise<PersistencePromise>(async (resolve, reject) => {
+      let type: string = 'store';
+      let received;
+      console.log(input);
 
-  public async storeElement(
-    content: ServiceSimpleModel
-  ): Promise<ServiceModel> {
-    // console.log('store:' + content);
-    // @ts-ignore
-    return (await this.journaly.publish('TestDAO.store', content))[0];
+      try {
+        received = await this.dAO(type, 'item' in input ? input.item : input);
+      } catch (error) {
+        reject(error);
+      }
+
+      console.log('received:', received);
+
+      resolve(
+        new PersistencePromise({
+          receivedItem: received,
+          result: true,
+          sentItem: 'item' in input ? input.item : input,
+        })
+      );
+    });
   }
-
-  public async updateElement(
-    id: string,
-    content: ServiceSimpleModel
-  ): Promise<ServiceModel> {
-    // @ts-ignore
-    return (await this.journaly.publish('TestDAO.update', id, content))[0];
+  nonexistent(input: PersistenceInputDelete | string): Promise<PersistencePromise> {
+    return this.delete(input);
   }
+  delete(input: PersistenceInputDelete | string): Promise<PersistencePromise> {
+    return new Promise<PersistencePromise>(async (resolve, reject) => {
+      let type: string = 'delete';
+      let received;
+      try {
+        if (type === 'selectById')
+          received = await this.dAO(type, typeof input === "string" ? input : input.id);
+        else
+          received = await this.dAO(type);
+      } catch (error) {
+        reject(error);
+      }
 
-  public async deleteElement(id: string): Promise<boolean> {
-    // @ts-ignore
-    return (await this.journaly.publish('TestDAO.delete', id))[0];
+      resolve(
+        new PersistencePromise({
+          receivedItem: typeof input === "string" ? received[0] :
+            input.single ? received[0] : received,
+          result: true,
+          selectedItem: typeof input === "string" ? input : input.id,
+        })
+      );
+    });
   }
-
-  public selectById(id: string): Promise<ServiceModel> {
-    // @ts-ignore
-    return super.selectById(id) as Promise<ServiceModel>;
+  correct(input: PersistenceInputUpdate): Promise<PersistencePromise> {
+    return this.correct(input);
   }
-
-  public selectAll(): Promise<Array<ServiceModel>> {
-    // @ts-ignore
-    return super.selectAll() as Promise<Array<ServiceModel>>;
+  update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
+    return new Promise<PersistencePromise>(async (resolve, reject) => {
+      let type: string = 'update';
+      let received;
+      try {
+        received = await this.dAO(type, input.id, input.item);
+      } catch (error) {
+        reject(error);
+      }
+      resolve(
+        new PersistencePromise({
+          receivedItem: input.single ? received[0] : received,
+          result: true,
+          selectedItem: input.id,
+          sentItem: input.item,
+        })
+      );
+    });
   }
+  read(input: PersistenceInputRead | string): Promise<PersistencePromise> {
+    return new Promise<PersistencePromise>(async (resolve, reject) => {
 
-  public store(content: ServiceSimpleModel): Promise<ServiceModel> {
-    // @ts-ignore
-    return super.store(content) as Promise<ServiceModel>;
-  }
+      let type: string = typeof input === "string" || input.id ? 'selectById' : 'selectAll';
+      let received;
+      try {
+        if (type === 'selectById')
+          received = await this.dAO(type, typeof input === "string" ? input : input.id);
+        else
+          received = await this.dAO(type);
+      } catch (error) {
+        reject(error);
+      }
 
-  public update(
-    id: string,
-    content: ServiceSimpleModel
-  ): Promise<ServiceModel> {
-    // @ts-ignore
-    return super.update(id, content) as Promise<ServiceModel>;
+      resolve(
+        new PersistencePromise({
+          receivedItem: typeof input === "string" ? received[0] :
+            input.single ? received[0] : received,
+          result: true,
+          selectedItem: typeof input === "string" ? input : input.id,
+        })
+      );
+    });
   }
 }

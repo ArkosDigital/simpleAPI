@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import ServiceModel from '../model/serviceModel';
-import ServiceSimpleModel from '../model/serviceSimpleModel';
+import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
 import BaseControllerDefault from './baseControllerDefault';
-import ControllerUpdateAdapter from '../adapter/controller/controllerUpdateAdapter';
+import ControllerUpdateAdapter from '../adapter/controllerUpdateAdapter';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 export default class BaseControllerUpdate extends BaseControllerDefault
@@ -19,7 +18,10 @@ export default class BaseControllerUpdate extends BaseControllerDefault
       const { id } = req.params;
       const content = req.body as ServiceSimpleModel;
       const object = {};
-      object[this.element] = await this.updateElement(id, content);
+      if (this.element)
+        object[this.element] = await this.updateElement(id, content);
+      else
+        throw new Error("Element is not specified.");
       return res.json(object);
     } catch (error) {
       return res
