@@ -2,22 +2,35 @@
 import {
   ServiceModel,
   ServiceSimpleModel,
-  BaseServiceDefault
-} from '@flexiblepersistence/service'
-import { PersistenceAdapter, PersistenceInputCreate, PersistencePromise, PersistenceInputDelete, PersistenceInputUpdate, PersistenceInputRead } from 'flexiblepersistence'
-export default class TestService extends BaseServiceDefault
+  BaseServiceDefault,
+} from '@flexiblepersistence/service';
+import {
+  PersistenceAdapter,
+  PersistenceInputCreate,
+  PersistencePromise,
+  PersistenceInputDelete,
+  PersistenceInputUpdate,
+  PersistenceInputRead,
+} from 'flexiblepersistence';
+export default class TestService
+  extends BaseServiceDefault
   implements PersistenceAdapter {
-  close(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+  async close(): Promise<boolean> {
+    return await new Promise<boolean>(async (resolve) => {
+      resolve(true);
+    });
   }
   getDatabaseInfo() {
     throw new Error('Method not implemented.');
   }
-  create(input: PersistenceInputCreate | {}): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>(async (resolve, reject) => {
-      let type: string = 'store';
+  async create(
+    input: PersistenceInputCreate | {}
+  ): Promise<PersistencePromise> {
+    return await new Promise<PersistencePromise>(async (resolve, reject) => {
+      const type = 'store';
       let received;
-      console.log(input);
+      input['item'].id = input['id'];
+      console.log('RECEIVED INPUT: ', input);
 
       try {
         received = await this.dAO(type, 'item' in input ? input.item : input);
@@ -36,28 +49,36 @@ export default class TestService extends BaseServiceDefault
       );
     });
   }
-  nonexistent(input: PersistenceInputDelete | string): Promise<PersistencePromise> {
+  nonexistent(
+    input: PersistenceInputDelete | string
+  ): Promise<PersistencePromise> {
     return this.delete(input);
   }
   delete(input: PersistenceInputDelete | string): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>(async (resolve, reject) => {
-      let type: string = 'delete';
+      const type = 'delete';
       let received;
       try {
-        if (type === 'selectById')
-          received = await this.dAO(type, typeof input === "string" ? input : input.id);
-        else
-          received = await this.dAO(type);
+        // if (type === 'selectById')
+        received = await this.dAO(
+          type,
+          typeof input === 'string' ? input : input.id
+        );
+        // else received = await this.dAO(type);
       } catch (error) {
         reject(error);
       }
 
       resolve(
         new PersistencePromise({
-          receivedItem: typeof input === "string" ? received[0] :
-            input.single ? received[0] : received,
+          receivedItem:
+            typeof input === 'string'
+              ? received[0]
+              : input.single
+              ? received[0]
+              : received,
           result: true,
-          selectedItem: typeof input === "string" ? input : input.id,
+          selectedItem: typeof input === 'string' ? input : input.id,
         })
       );
     });
@@ -67,7 +88,7 @@ export default class TestService extends BaseServiceDefault
   }
   update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>(async (resolve, reject) => {
-      let type: string = 'update';
+      const type = 'update';
       let received;
       try {
         received = await this.dAO(type, input.id, input.item);
@@ -86,24 +107,30 @@ export default class TestService extends BaseServiceDefault
   }
   read(input: PersistenceInputRead | string): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>(async (resolve, reject) => {
-
-      let type: string = typeof input === "string" || input.id ? 'selectById' : 'selectAll';
+      const type: string =
+        typeof input === 'string' || input.id ? 'selectById' : 'selectAll';
       let received;
       try {
         if (type === 'selectById')
-          received = await this.dAO(type, typeof input === "string" ? input : input.id);
-        else
-          received = await this.dAO(type);
+          received = await this.dAO(
+            type,
+            typeof input === 'string' ? input : input.id
+          );
+        else received = await this.dAO(type);
       } catch (error) {
         reject(error);
       }
 
       resolve(
         new PersistencePromise({
-          receivedItem: typeof input === "string" ? received[0] :
-            input.single ? received[0] : received,
+          receivedItem:
+            typeof input === 'string'
+              ? received[0]
+              : input.single
+              ? received[0]
+              : received,
           result: true,
-          selectedItem: typeof input === "string" ? input : input.id,
+          selectedItem: typeof input === 'string' ? input : input.id,
         })
       );
     });

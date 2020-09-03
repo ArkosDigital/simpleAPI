@@ -15,14 +15,14 @@ export default abstract class DatabaseHandler {
   public service: {
     [name: string]: PersistenceAdapter;
   } = {
-      // test: exampleService,
-    };
+    // test: exampleService,
+  };
 
   public dAO: {
     [name: string]: DAOAdapter;
   } = {
-      // test: exampleDAO
-    };
+    // test: exampleDAO
+  };
   // @ts-ignore
   protected eventHandler: Handler;
   // @ts-ignore
@@ -31,12 +31,12 @@ export default abstract class DatabaseHandler {
   protected operation: {
     [operation: number]: string;
   } = {
-      0: 'storeElement',
-      2: 'updateElement',
-      3: 'updateElement',
-      4: 'deleteElement',
-      5: 'deleteElement',
-    };
+    0: 'storeElement',
+    2: 'updateElement',
+    3: 'updateElement',
+    4: 'deleteElement',
+    5: 'deleteElement',
+  };
 
   protected static _instance: DatabaseHandler;
 

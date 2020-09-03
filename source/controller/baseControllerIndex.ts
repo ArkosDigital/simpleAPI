@@ -14,10 +14,8 @@ export default class BaseControllerIndex extends BaseControllerDefault
     try {
       const { id } = req.params;
       const object = {};
-      if (this.element)
-        object[this.element] = await this.selectById(id);
-      else
-        throw new Error("Element is not specified.");
+      if (this.element) object[this.element] = await this.selectById(id);
+      else throw new Error('Element is not specified.');
       return res.json(object);
     } catch (error) {
       return res

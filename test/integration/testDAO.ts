@@ -20,10 +20,8 @@ export default class TestDAO extends BaseDAO {
     content: DAOSimpleModel
   ): Promise<Array<unknown>> {
     let values;
-    console.log('WTF');
     if (content && content.id) values = [content.id];
     else values = [];
-    console.log('values:', values);
     return new Promise((resolve) => resolve(values));
   }
 }
